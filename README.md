@@ -5,6 +5,8 @@
 [ 🇷🇺 Русский ](#ru) | [ 🇬🇧 English ](#en)
 
 ---
+![Platform](https://img.shields.io/badge/Platform-Acer_5742G-lightgrey)
+![Tools](https://img.shields.io/badge/Tools-UEFITool_%7C_HxD-orange)
 
 <h2 id="ru">🇷🇺 Русский (Описание)</h2>
 В данном репозитории находятся дампы BIOS для ноутбука Acer Aspire 5742G, а также подробная пошаговая инструкция по самостоятельной разблокировке скрытых инженерных меню (Advanced и Power), замене загрузочного логотипа и глубокой низкоуровневой оптимизации. Данная модификация (Acer PEW71 bios modification) позволяет получить полный контроль над системой, решить проблемы с перегревом (Acer 5742G thermal throttling fix) и навсегда отключить встроенные системы слежения (InsydeH2O Computrace disable). Идеально подходит для тех, кто ищет чистый LA-5894P dump.
@@ -18,6 +20,7 @@
 4. **СДЕЛАЙТЕ БЭКАП:** Прежде чем что-то зашивать, считайте свой оригинальный BIOS через программатор минимум 2-3 раза. Сохраните эти файлы и проверьте, чтобы они были абсолютно идентичны (совпадали хэш-суммы). Если файлы разные — прищепка установлена криво, считывать и шить так нельзя!
 5. **ЗАПАСНОЙ ПК:** Не приступайте к прошивке модифицированного BIOS, если у вас нет под рукой второго рабочего компьютера/ноутбука. В случае ошибки вам понадобится второе устройство, чтобы прошить оригинальный дамп обратно.
 
+> [!WARNING]
 > **ВСЕ ДЕЙСТВИЯ ВЫ ВЫПОЛНЯЕТЕ ИСКЛЮЧИТЕЛЬНО НА СВОЙ СТРАХ И РИСК!** Автор репозитория не несет ответственности за вышедшее из строя оборудование.
 
 ---
@@ -172,11 +175,12 @@ HEX-коды меню из SetupUtility
 
 *(Если возникнут проблемы — пишите на почту byteghosthelper@gmail.com, попытаюсь помочь всем, чем смогу. Также для более быстрого ответа вы можете скинуть ссылку на мой репозиторий любому искусственному интеллекту (с доступом к интернету, например, Gemini, Qwen или DeepSeek) с просьбой объяснить всё более подробно и чётко, если моих инструкций окажется недостаточно).*
 
-[ Вернемся к началу. ](#n)
+[ ⬆️ Вернуться к началу ](#n)
 <br><br>
 
 ---
-
+![Platform](https://img.shields.io/badge/Platform-Acer_5742G-lightgrey)
+![Tools](https://img.shields.io/badge/Tools-UEFITool_%7C_HxD-orange)
 <h2 id="en">🇬🇧 English (Description)</h2>
 This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with a detailed step-by-step guide for manually unlocking hidden engineering menus (Advanced and Power), replacing the boot logo, and performing low-level optimizations. This modification (Acer PEW71 bios modification) gives you full control over your system, helps resolve overheating issues (Acer 5742G thermal throttling fix), and permanently removes built-in tracking systems (InsydeH2O Computrace disable). Perfect for those looking for a clean LA-5894P dump.
 
@@ -189,6 +193,7 @@ This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with
 4. **MAKE A BACKUP:** Before flashing anything, read your original BIOS via the programmer at least 2-3 times. Save these files and check that they are absolutely identical (hash sums match). If the files are different, the clip is seated crookedly; do not read or flash like this!
 5. **SPARE PC:** Do not start flashing the modified BIOS if you do not have a second working PC/laptop at hand. In case of an error, you will need a second device to flash the original dump back.
 
+> [!WARNING]
 > **ALL ACTIONS ARE PERFORMED ENTIRELY AT YOUR OWN RISK!** The author of the repository is not responsible for any damaged equipment.
 
 ---
@@ -343,4 +348,4 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 
 *(If you have any problems — write to byteghosthelper@gmail.com, I will try to help with whatever I can. Also, for a faster response, you can drop a link to my repository to any artificial intelligence (with internet access, for example, Gemini, Qwen, or DeepSeek) asking to explain everything more in detail and clearly, if my instructions turn out to be insufficient).*
 
-[ Back to the beginning. ](#n)
+[ ⬆️ Back to the top ](#n)
