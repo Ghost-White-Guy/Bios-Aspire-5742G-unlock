@@ -1,6 +1,6 @@
 # 🛠️ Acer Aspire 5742G BIOS Unlock (Advanced & Power Menus) + Custom Logo
 
-[ 🇷🇺 Русский ](#🇷🇺-русский-описание) | [ 🇬🇧 English ](#🇬🇧-english-description)
+[ 🇷🇺 Русский ](#русский-описание) | [ 🇬🇧 English ](#english-description)
 
 ---
 
@@ -173,7 +173,7 @@ HEX-коды меню из SetupUtility
 <br><br>
 
 ---
-<a id="en"></a>
+
 ## 🇬🇧 English (Description)
 This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with a detailed step-by-step guide for manually unlocking hidden engineering menus (Advanced and Power), replacing the boot logo, and performing low-level optimizations. This modification (Acer PEW71 bios modification) gives you full control over your system, helps resolve overheating issues (Acer 5742G thermal throttling fix), and permanently removes built-in tracking systems (InsydeH2O Computrace disable). Perfect for those looking for a clean LA-5894P dump.
 
