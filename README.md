@@ -24,6 +24,28 @@
 > [!WARNING]
 > **ВСЕ ДЕЙСТВИЯ ВЫ ВЫПОЛНЯЕТЕ ИСКЛЮЧИТЕЛЬНО НА СВОЙ СТРАХ И РИСК!** Автор репозитория не несет ответственности за вышедшее из строя оборудование.
 
+<details>
+  <summary><b>📸 Скриншоты разблокированного BIOS</b></summary>
+  <br>
+  <img src="1.jpg" alt="Advanced" width="600">
+  <br><br>
+  <img src="2.jpg" alt="Power & CPU" width="600">
+  <br><br>
+  <img src="3.jpg" alt="Main" width="600">
+  <br><br>
+  
+  <details>
+    <summary><b> Дополнительно</b></summary>
+    <br>
+     <img src="4.jpg" alt="Chipset Configuration -> Arrandale MRC/QPI" width="600">
+     <br><br>
+     <img src="5.jpg" alt="Video Configuration" width="600">
+     <br><br>
+     <img src="6.jpg" alt="Power & CPU -> Security CPU Control" width="600">
+     <br><br>
+    </details>
+</details>
+
 ---
 
 ## 💻 Тест проводился исключительно на данных комплектующих:
@@ -79,6 +101,10 @@
 
 ---
 
+<details>
+  <summary><b>📖 Подробные инструкции по прошивке и модификации (Нажми, чтобы развернуть)</b></summary>
+  <br>
+ 
 ## ⚙️ ИНСТРУКЦИЯ 1: Самостоятельная разблокировка меню (Подмена масок)
 
 *(Если вы хотите понять, как это работает, и сделать разблокировку скрытых меню своими руками).*
@@ -172,11 +198,14 @@ HEX-коды меню из SetupUtility
 5. Проверьте свой ноутбук на включение и вход в BIOS и Систему перед сборкой.
 6. Если всё хорошо, то смело собирайте ноутбук. Готово!
 
+[ ⬆️ Вернуться к началу ](#n)
+
+</details>
+
 ---
 
 *(Если возникнут проблемы — пишите на почту byteghosthelper@gmail.com, попытаюсь помочь всем, чем смогу. Также для более быстрого ответа вы можете скинуть ссылку на мой репозиторий любому искусственному интеллекту (с доступом к интернету, например, Gemini, Qwen или DeepSeek) с просьбой объяснить всё более подробно и чётко, если моих инструкций окажется недостаточно).*
 
-[ ⬆️ Вернуться к началу ](#n)
 <br><br>
 
 ---
@@ -196,6 +225,28 @@ This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with
 
 > [!WARNING]
 > **ALL ACTIONS ARE PERFORMED ENTIRELY AT YOUR OWN RISK!** The author of the repository is not responsible for any damaged equipment.
+
+<details>
+  <summary><b>📸 Screenshots of the unlocked BIOS</b></summary>
+  <br>
+  <img src="1.jpg" alt="Advanced" width="600">
+  <br><br>
+  <img src="2.jpg" alt="Power & CPU" width="600">
+  <br><br>
+  <img src="3.jpg" alt="Main" width="600">
+  <br><br>
+  
+  <details>
+    <summary><b> Additionally</b></summary>
+    <br>
+     <img src="4.jpg" alt="Chipset Configuration -> Arrandale MRC/QPI" width="600">
+     <br><br>
+     <img src="5.jpg" alt="Video Configuration" width="600">
+     <br><br>
+     <img src="6.jpg" alt="Power & CPU -> Security CPU Control" width="600">
+     <br><br>
+    </details>
+</details>
 
 ---
 
@@ -251,6 +302,10 @@ For your convenience, all necessary programs are packed into `.7z` archives. You
 5. **`H2OEZE.7z`** — utility for replacing the boot Logo.
 
 ---
+
+<details>
+  <summary><b>📖 Detailed instructions on firmware and modifications (Click to expand)</b></summary>
+  <br>
 
 ## ⚙️ INSTRUCTION 1: Manual menu unlocking (Mask substitution)
 
@@ -345,8 +400,12 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 5. Check your laptop for turning on and entering the BIOS and System before reassembling.
 6. If everything is fine, then safely assemble the laptop. Done!
 
+[ ⬆️ Back to the top ](#n)
+
+</details>
+
 ---
 
 *(If you have any problems — write to byteghosthelper@gmail.com, I will try to help with whatever I can. Also, for a faster response, you can drop a link to my repository to any artificial intelligence (with internet access, for example, Gemini, Qwen, or DeepSeek) asking to explain everything more in detail and clearly, if my instructions turn out to be insufficient).*
 
-[ ⬆️ Back to the top ](#n)
+
