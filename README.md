@@ -198,9 +198,9 @@ HEX-коды меню из SetupUtility
 5. Проверьте свой ноутбук на включение и вход в BIOS и Систему перед сборкой.
 6. Если всё хорошо, то смело собирайте ноутбук. Готово!
 
-[ ⬆️ Вернуться к началу ](#n)
-
 </details>
+
+[ ⬆️ Вернуться к началу ](#n)
 
 ---
 
@@ -400,9 +400,11 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 5. Check your laptop for turning on and entering the BIOS and System before reassembling.
 6. If everything is fine, then safely assemble the laptop. Done!
 
-[ ⬆️ Back to the top ](#n)
-
 </details>
+
+[ ⬆️ Back to English start ](#en)
+
+[ ⬆️ Back to the very top ](#n)
 
 ---
 
