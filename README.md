@@ -27,21 +27,21 @@
 <details>
   <summary><b>📸 Скриншоты разблокированного BIOS</b></summary>
   <br>
-  <img src="1.jpg" alt="Advanced" width="600">
+  <img src="images/1.jpg" alt="Advanced" width="600">
   <br><br>
-  <img src="2.jpg" alt="Power & CPU" width="600">
+  <img src="images/2.jpg" alt="Power & CPU" width="600">
   <br><br>
-  <img src="3.jpg" alt="Main" width="600">
+  <img src="images/3.jpg" alt="Main" width="600">
   <br><br>
   
   <details>
-    <summary><b> Дополнительно</b></summary>
+    <summary><b> Additionally / Screenshots</b></summary>
     <br>
-     <img src="4.jpg" alt="Chipset Configuration -> Arrandale MRC/QPI" width="600">
+     <img src="images/4.jpg" alt="Chipset Configuration -> Arrandale MRC/QPI" width="600">
      <br><br>
-     <img src="5.jpg" alt="Video Configuration" width="600">
+     <img src="images/5.jpg" alt="Video Configuration" width="600">
      <br><br>
-     <img src="6.jpg" alt="Power & CPU -> Security CPU Control" width="600">
+     <img src="images/6.jpg" alt="Power & CPU -> Security CPU Control" width="600">
      <br><br>
     </details>
 </details>
@@ -229,21 +229,21 @@ This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with
 <details>
   <summary><b>📸 Screenshots of the unlocked BIOS</b></summary>
   <br>
-  <img src="1.jpg" alt="Advanced" width="600">
+  <img src="images/1.jpg" alt="Advanced" width="600">
   <br><br>
-  <img src="2.jpg" alt="Power & CPU" width="600">
+  <img src="images/2.jpg" alt="Power & CPU" width="600">
   <br><br>
-  <img src="3.jpg" alt="Main" width="600">
+  <img src="images/3.jpg" alt="Main" width="600">
   <br><br>
   
   <details>
-    <summary><b> Additionally</b></summary>
+    <summary><b> Additionally / Screenshots</b></summary>
     <br>
-     <img src="4.jpg" alt="Chipset Configuration -> Arrandale MRC/QPI" width="600">
+     <img src="images/4.jpg" alt="Chipset Configuration -> Arrandale MRC/QPI" width="600">
      <br><br>
-     <img src="5.jpg" alt="Video Configuration" width="600">
+     <img src="images/5.jpg" alt="Video Configuration" width="600">
      <br><br>
-     <img src="6.jpg" alt="Power & CPU -> Security CPU Control" width="600">
+     <img src="images/6.jpg" alt="Power & CPU -> Security CPU Control" width="600">
      <br><br>
     </details>
 </details>
