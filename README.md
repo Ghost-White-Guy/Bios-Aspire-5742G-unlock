@@ -13,12 +13,13 @@
 
 **🔍 Ключевые слова для поиска:** LA-5894P dump, Acer 5742G thermal throttling fix, InsydeH2O Computrace disable, Acer PEW71 bios modification.
 
-⚠️ **КРИТИЧЕСКИЕ ПРЕДУПРЕЖДЕНИЯ (ЧИТАТЬ ОБЯЗАТЕЛЬНО!)** ⚠️
-1. **ТОЛЬКО ПРОГРАММАТОР:** Прошивка модифицированного BIOS должна производиться **СТРОГО** через аппаратный программатор (например, CH341A) с прищепкой или через выпаивание чипа памяти. 
-2. **НЕТ ПРОШИВКЕ ИЗ WINDOWS:** Попытка прошить этот мод через штатные утилиты (InsydeFlash и др.) из-под ОС приведет к ошибке контрольных сумм / проверке цифровой подписи и гарантированному **«окирпичиванию»** ноутбука.
-3. **ОБЕСТОЧЬТЕ ПЛАТУ:** Перед подключением прищепки программатора к чипу **ОБЯЗАТЕЛЬНО** отключите блок питания и снимите аккумуляторную батарею с ноутбука. 
-4. **СДЕЛАЙТЕ БЭКАП:** Прежде чем что-то зашивать, считайте свой оригинальный BIOS через программатор минимум 2-3 раза. Сохраните эти файлы и проверьте, чтобы они были абсолютно идентичны (совпадали хэш-суммы). Если файлы разные — прищепка установлена криво, считывать и шить так нельзя!
-5. **ЗАПАСНОЙ ПК:** Не приступайте к прошивке модифицированного BIOS, если у вас нет под рукой второго рабочего компьютера/ноутбука. В случае ошибки вам понадобится второе устройство, чтобы прошить оригинальный дамп обратно.
+> [!CAUTION]
+> ### ⚠️ КРИТИЧЕСКИЕ ПРЕДУПРЕЖДЕНИЯ (ЧИТАТЬ ОБЯЗАТЕЛЬНО!)
+> 1. **ТОЛЬКО ПРОГРАММАТОР:** Прошивка модифицированного BIOS должна производиться **СТРОГО** через аппаратный программатор (например, CH341A) с прищепкой или через выпаивание чипа памяти. 
+> 2. **НЕТ ПРОШИВКЕ ИЗ WINDOWS:** Попытка прошить этот мод через штатные утилиты (InsydeFlash и др.) из-под ОС приведет к ошибке контрольных сумм / проверке цифровой подписи и гарантированному **«окирпичиванию»** ноутбука.
+> 3. **ОБЕСТОЧЬТЕ ПЛАТУ:** Перед подключением прищепки программатора к чипу **ОБЯЗАТЕЛЬНО** отключите блок питания и снимите аккумуляторную батарею с ноутбука. 
+> 4. **СДЕЛАЙТЕ БЭКАП:** Прежде чем что-то зашивать, считайте свой оригинальный BIOS через программатор минимум 2-3 раза. Сохраните эти файлы и проверьте, чтобы они были абсолютно идентичны (совпадали хэш-суммы). Если файлы разные — прищепка установлена криво, считывать и шить так нельзя!
+> 5. **ЗАПАСНОЙ ПК:** Не приступайте к прошивке модифицированного BIOS, если у вас нет под рукой второго рабочего компьютера/ноутбука. В случае ошибки вам понадобится второе устройство, чтобы прошить оригинальный дамп обратно.
 
 > [!WARNING]
 > **ВСЕ ДЕЙСТВИЯ ВЫ ВЫПОЛНЯЕТЕ ИСКЛЮЧИТЕЛЬНО НА СВОЙ СТРАХ И РИСК!** Автор репозитория не несет ответственности за вышедшее из строя оборудование.
@@ -179,19 +180,19 @@ HEX-коды меню из SetupUtility
 <br><br>
 
 ---
-![Platform](https://img.shields.io/badge/Platform-Acer_5742G-lightgrey)
-![Tools](https://img.shields.io/badge/Tools-UEFITool_%7C_HxD-orange)
+
 <h2 id="en">🇬🇧 English (Description)</h2>
 This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with a detailed step-by-step guide for manually unlocking hidden engineering menus (Advanced and Power), replacing the boot logo, and performing low-level optimizations. This modification (Acer PEW71 bios modification) gives you full control over your system, helps resolve overheating issues (Acer 5742G thermal throttling fix), and permanently removes built-in tracking systems (InsydeH2O Computrace disable). Perfect for those looking for a clean LA-5894P dump.
 
 **🔍 Search Keywords:** LA-5894P dump, Acer 5742G thermal throttling fix, InsydeH2O Computrace disable, Acer PEW71 bios modification.
 
-⚠️ **CRITICAL WARNINGS (MUST READ!)** ⚠️
-1. **PROGRAMMER ONLY:** Flashing the modified BIOS must be done **STRICTLY** via a hardware programmer (e.g., CH341A) with a clip or by desoldering the memory chip.
-2. **NO WINDOWS FLASHING:** Attempting to flash this mod using standard utilities (InsydeFlash, etc.) from the OS will result in a checksum/digital signature verification error and will guarantee a **"bricked"** laptop.
-3. **DE-ENERGIZE THE BOARD:** Before connecting the programmer clip to the chip, you **MUST** disconnect the power supply and remove the battery from the laptop.
-4. **MAKE A BACKUP:** Before flashing anything, read your original BIOS via the programmer at least 2-3 times. Save these files and check that they are absolutely identical (hash sums match). If the files are different, the clip is seated crookedly; do not read or flash like this!
-5. **SPARE PC:** Do not start flashing the modified BIOS if you do not have a second working PC/laptop at hand. In case of an error, you will need a second device to flash the original dump back.
+> [!CAUTION]
+> ### ⚠️ CRITICAL WARNINGS (MUST READ!)
+> 1. **PROGRAMMER ONLY:** Flashing the modified BIOS must be done **STRICTLY** via a hardware programmer (e.g., CH341A) with a clip or by desoldering the memory chip.
+> 2. **NO WINDOWS FLASHING:** Attempting to flash this mod using standard utilities (InsydeFlash, etc.) from the OS will result in a checksum/digital signature verification error and will guarantee a **"bricked"** laptop.
+> 3. **DE-ENERGIZE THE BOARD:** Before connecting the programmer clip to the chip, you **MUST** disconnect the power supply and remove the battery from the laptop.
+> 4. **MAKE A BACKUP:** Before flashing anything, read your original BIOS via the programmer at least 2-3 times. Save these files and check that they are absolutely identical (hash sums match). If the files are different, the clip is seated crookedly; do not read or flash like this!
+> 5. **SPARE PC:** Do not start flashing the modified BIOS if you do not have a second working PC/laptop at hand. In case of an error, you will need a second device to flash the original dump back.
 
 > [!WARNING]
 > **ALL ACTIONS ARE PERFORMED ENTIRELY AT YOUR OWN RISK!** The author of the repository is not responsible for any damaged equipment.
