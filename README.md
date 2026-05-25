@@ -1,3 +1,4 @@
+<h2 id="n"</h2>
 # 🛠️ Acer Aspire 5742G BIOS Unlock (Advanced & Power Menus) + Custom Logo
 
 [ 🇷🇺 Русский ](#ru) | [ 🇬🇧 English ](#en)
@@ -170,6 +171,7 @@ HEX-коды меню из SetupUtility
 
 *(Если возникнут проблемы — пишите на почту byteghosthelper@gmail.com, попытаюсь помочь всем, чем смогу. Также для более быстрого ответа вы можете скинуть ссылку на мой репозиторий любому искусственному интеллекту (с доступом к интернету, например, Gemini, Qwen или DeepSeek) с просьбой объяснить всё более подробно и чётко, если моих инструкций окажется недостаточно).*
 
+[ Вернемся к началу. ](#n)
 <br><br>
 
 ---
@@ -339,3 +341,5 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 ---
 
 *(If you have any problems — write to byteghosthelper@gmail.com, I will try to help with whatever I can. Also, for a faster response, you can drop a link to my repository to any artificial intelligence (with internet access, for example, Gemini, Qwen, or DeepSeek) asking to explain everything more in detail and clearly, if my instructions turn out to be insufficient).*
+
+[ Back to the beginning. ](#n)
