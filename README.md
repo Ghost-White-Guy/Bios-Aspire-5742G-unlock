@@ -307,6 +307,8 @@ For your convenience, all necessary programs are packed into `.7z` archives. You
 
 ---
 
+### Firmware and modification instructions
+
 <details>
   <summary><b>📖 Detailed instructions on firmware and modifications (Click to expand)</b></summary>
   <br>
