@@ -35,7 +35,7 @@
   <br><br>
   
   <details>
-    <summary><b> Additionally / Screenshots</b></summary>
+    <summary><b> Дополнительные </b></summary>
     <br>
      <img src="images/4.jpg" alt="Chipset Configuration -> Arrandale MRC/QPI" width="600">
      <br><br>
