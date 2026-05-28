@@ -208,6 +208,13 @@ HEX-коды меню из SetupUtility
 
 ---
 
+<p align="center">
+  <i>Сделано с упорством, ошибками и любовью к железу 🔧</i><br>
+  <i>Каждое предупреждение здесь — это мой личный факап, превращённый в защиту для вас.</i>
+</p>
+
+---
+
 *(Если возникнут проблемы — пишите на почту byteghosthelper@gmail.com, попытаюсь помочь всем, чем смогу. Также для более быстрого ответа вы можете скинуть ссылку на мой репозиторий любому искусственному интеллекту (с доступом к интернету, например, Gemini, Qwen или DeepSeek) с просьбой объяснить всё более подробно и чётко, если моих инструкций окажется недостаточно).*
 
 <br><br>
@@ -411,6 +418,13 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 [ ⬆️ Back to English start ](#en)
 
 [ ⬆️ Back to the very top ](#n)
+
+---
+
+<p align="center">
+  <i>Crafted with grit, errors, and a passion for hardware 🔧</i><br>
+  <i>Every warning in this guide is a personal failure turned into your protection.</i>
+</p>
 
 ---
 
