@@ -8,7 +8,7 @@
 ![Platform](https://img.shields.io/badge/Platform-Acer_5742G-lightgrey)
 ![Tools](https://img.shields.io/badge/Tools-UEFITool_%7C_HxD-orange)
 
-[![Инструкция](https://img.shields.io/badge/🔌_Инструкция_Финальная_прошивка-red?style=for-the-badge)](#flash-ru)
+[![Инструкция по прошивке](https://img.shields.io/badge/🔌_Инструкция-по_прошивке-red?style=for-the-badge)](#flash-ru)
 
 <h2 id="ru">🇷🇺 Русский (Описание)</h2>
 В данном репозитории находятся дампы BIOS для ноутбука Acer Aspire 5742G, а также подробная пошаговая инструкция по самостоятельной разблокировке скрытых инженерных меню (Advanced и Power), замене загрузочного логотипа и глубокой низкоуровневой оптимизации. Данная модификация (Acer PEW71 bios modification) позволяет получить полный контроль над системой, решить проблемы с перегревом (Acer 5742G thermal throttling fix) и навсегда отключить встроенные системы слежения (InsydeH2O Computrace disable). Идеально подходит для тех, кто ищет чистый LA-5894P dump.
@@ -230,7 +230,7 @@ HEX-коды меню из SetupUtility
 
 <h2 id="en">🇬🇧 English (Description)</h2>
 
-[![Instruction 4](https://img.shields.io/badge/🔌_Instruction_4-Final_Flashing-red?style=for-the-badge)](#flash-en)
+[![Flashing instructions](https://img.shields.io/badge/🔌_Instructions-Flashing-red?style=for-the-badge)](#flash-en)
 
 This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with a detailed step-by-step guide for manually unlocking hidden engineering menus (Advanced and Power), replacing the boot logo, and performing low-level optimizations. This modification (Acer PEW71 bios modification) gives you full control over your system, helps resolve overheating issues (Acer 5742G thermal throttling fix), and permanently removes built-in tracking systems (InsydeH2O Computrace disable). Perfect for those looking for a clean LA-5894P dump.
 
