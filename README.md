@@ -98,7 +98,7 @@
 Для вашего удобства все нужные программы упакованы в `.7z` архивы. Вам не нужно искать их в интернете — просто скачайте и распакуйте:
 1. **`AsProgrammer.7z`** — программа для считывания и записи прошивки (CH341A).
 2. **`UEFITool.7z`** — утилита для распаковки дампа BIOS и интеграции модулей логики.
-3. **`IRFExtractor.7z`** — конвертер логики IFR.
+3. **`IFRExtractor.7z`** — конвертер логики IFR.
 4. **`HxD.7z`** — Hex-редактор.
 5. **`H2OEZE.7z`** — утилита для замены загрузочного Logo.
 
@@ -123,7 +123,7 @@
 4. Сохраните файл как `SetupUtility.bin`.
 
 #### Шаг 2: Анализ IFR (Поиск масок меню)
-1. Запустите **IRFExtractor** и прогоните через него `SetupUtility.bin`.
+1. Запустите **IFRExtractor** и прогоните через него `SetupUtility.bin`.
 2. В полученном `.txt` файле найдите секции `Offset`. 
    * *Для Compal LA-5894P ID выглядят так:*
      * `Information` = Offset: `0x7F400`
@@ -331,7 +331,7 @@ Conservative settings are set in the base `mod_bios.rom`. To unlock the full pot
 For your convenience, all necessary programs are packed into `.7z` archives. You don't need to search for them on the internet — just download and extract:
 1. **`AsProgrammer.7z`** — software for reading and writing firmware (CH341A).
 2. **`UEFITool.7z`** — utility for unpacking the BIOS dump and integrating logic modules.
-3. **`IRFExtractor.7z`** — IFR logic converter.
+3. **`IFRExtractor.7z`** — IFR logic converter.
 4. **`HxD.7z`** — Hex editor.
 5. **`H2OEZE.7z`** — utility for replacing the boot Logo.
 
@@ -354,7 +354,7 @@ For your convenience, all necessary programs are packed into `.7z` archives. You
 4. Save the file as `SetupUtility.bin`.
 
 #### Step 2: IFR Analysis (Searching for menu masks)
-1. Run **IRFExtractor** and process `SetupUtility.bin` through it.
+1. Run **IFRExtractor** and process `SetupUtility.bin` through it.
 2. In the resulting `.txt` file, find the `Offset` sections. 
    * *For Compal LA-5894P, the IDs look like this:*
      * `Information` = Offset: `0x7F400`
