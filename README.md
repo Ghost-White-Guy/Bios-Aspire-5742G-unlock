@@ -36,7 +36,7 @@
 
 </details>
 
-В репозитории лежат дампы BIOS ноутбука **Acer Aspire 5742G** и подробная инструкция по разблокировке скрытых инженерных меню (`Advanced` и `Power & CPU`), замене загрузочного логотипа и правке значения Power Limit вручную.
+В репозитории лежат дампы BIOS ноутбука **Acer Aspire 5742G** и подробная инструкция по разблокировке скрытых инженерных меню (`Advanced` и `Power & CPU`) и замене загрузочного логотипа.
 
 Способ — **подмена масок (Form ID) в модуле `SetupUtility`**: BIOS начинает открывать инженерную форму вместо стандартной, ничего не пересобирая «с нуля» и не затрагивая остальные тома.
 
@@ -56,8 +56,8 @@
 > ### ⚠️ КРИТИЧЕСКИЕ ПРЕДУПРЕЖДЕНИЯ (ЧИТАТЬ ОБЯЗАТЕЛЬНО!)
 > 1. **ТОЛЬКО ПРОГРАММАТОР.** Прошивка модифицированного BIOS должна производиться **СТРОГО** через аппаратный программатор (например, CH341A) с прищепкой или через выпаивание чипа памяти.
 > 2. **ПРОШИВКА ИЗ WINDOWS НЕ РАБОТАЕТ.** Штатные утилиты (InsydeFlash и др.) из-под ОС этот мод не примут: уйдёт ошибка проверки, образ будет отклонён, а состояние ноутбука станет непредсказуемым. На этой модели **внешнего пути восстановления в самом BIOS нет** — проверено на практике.
-> 3. **ОБЕСТОЧЬТЕ ПЛАТУ.** Перед подключением прищепки **ОБЯЗАТЕЛЬНО** отключите блок питания и снимите аккумуляторную батарею.
-> 4. **СДЕЛАЙТЕ БЭКАП.** Считайте свой оригинальный BIOS программатором минимум 2–3 раза. Файлы должны совпадать по SHA256. Если разные — прищепка стоит криво, читать и шить так нельзя.
+> 3. **ОБЕСТОЧЬТЕ ПЛАТУ И ПРОВЕРЬТЕ ЧИП.** Перед подключением прищепки **ОБЯЗАТЕЛЬНО** отключите блок питания и снимите аккумуляторную батарею. Заодно прочитайте маркировку чипа: **объём и напряжение — разные вещи.** Среди SPI-флеш одинаковой ёмкости встречаются варианты на 1,8 В и на 3 В. Питание на микросхему идёт **от программатора через прищепку**, поэтому сверяйте напряжение именно вашего чипа с фактическим выходом именно вашего программатора и переходника — общее описание «CH341A — это 3,3 В» аргументом не является, переходники и модификации встречаются разные. Отдельно учтите, что программатор через прищепку может подпитывать и другие цепи платы. Маркировку сверяйте с документацией по конкретной микросхеме, а не по названию серии.
+> 4. **СДЕЛАЙТЕ БЭКАП.** Считайте свой оригинальный BIOS программатором минимум 2–3 раза. Файлы должны совпадать по SHA256. **Пока совпадения нет — стирать и записывать нельзя.** Расхождение чаще всего означает плохой контакт прищепки, но причины могут быть и другие: неисправный программатор, просадка питания линии, помехи на шлейфе. Угадывать причину не нужно — читать надо, пока не получатся два одинаковых файла.
 > 5. **ЗАПАСНОЙ ПК.** Не приступайте к прошивке, если рядом нет второго рабочего компьютера: он понадобится, чтобы залить оригинальный дамп обратно.
 > 6. **АППАРАТНЫЕ ОГРАНИЧЕНИЯ.** Часть инженерных пунктов плата принимает не всегда: значение может вернуться к заводскому при перезагрузке. Причин несколько — политика EC, значение в другом хранилище настроек, или то, что референс-код просто не читает этот пункт.
 
@@ -115,21 +115,30 @@
 | 1 | **Подмена масок в меню** — форма `Information` и форма `Power` поменялись местами; формы `Security` и `Advanced` обменялись содержимым | модуль `SetupUtility`, таблица меню |
 | 2 | **Массовая правка пунктов** — **155** значений по умолчанию в формах заменены на `0xFFFF`. В стоковом образе таких значений нет ни одного: это то, что реально открывает скрытые инженерные пункты | формы `SetupUtility` |
 | 3 | **Косметическое переименование** — пункт `Harddisk Security` стал `Harddisk Advanced`, добавлена подпись `Power` с выравниванием по длине | строки (Unicode) в `SetupUtility` |
-| 4 | **Power Limit** — значение по умолчанию проставлено вручную через hex-редактор, потому что в интерфейсе пункт выставлялся некорректно и периодически сбивался | форма `Power & CPU` |
-| 5 | **Загрузочный логотип** — штатная заставка заменена на свою (H2OEZE) | блок растра ≈ 201 КБ в DXE-томе |
+| 4 | **Загрузочный логотип** — штатная заставка заменена на свою (H2OEZE) | блок растра ≈ 201 КБ в DXE-томе |
 
 > [!IMPORTANT]
 > **Пункты 1 и 2 работают в связке.** Одной подмены масок недостаточно: BIOS начнёт открывать нужную форму, но её пункты останутся подавленными. Массовая правка на `0xFFFF` снимает это подавление.
 
+### Про Power Limit
+
+Значение Power Limit **не найдено ни в стоковом, ни в модифицированном дампе** — проверено побайтово.
+
+Настройка хранится в переменных NVRAM. Они могут лежать внутри SPI-образа, но это не значит, что значение меняется правкой `SetupUtility.bin`: модуль содержит описание формы и допустимый диапазон, а не текущее значение машины. Через этот модуль Power Limit не выставляется.
+
+Выставляйте его прямо в интерфейсе BIOS, вкладка `Power & CPU`, и проверьте, сохраняется ли значение после перезагрузки.
+
 ### Границы правки
 
-Во всём четырёхмегабайтном образе отличаются **только DXE firmware volume** и 22 байта его заголовка. Метаданные платы не тронуты:
+Во всём четырёхмегабайтном образе отличаются **только DXE firmware volume** и 22 байта его заголовка:
 
 * Intel ME регион — **побайтово идентичен** стоковому
 * Flash descriptor, PEI-том, SMM, загрузочный блок — **идентичны**
 * DMI-данные и серийные номера — **идентичны**
 
-То есть образ не тащит в себе чужие серийники и чужой ME, и откат получается чистым. Это границы **правки в файле** — риск самой процедуры прошивки определяется предупреждениями выше, а не этим списком.
+Прочие изменения затрагивают только DXE-том. DMI, ME и серийники в дампе остались такими же, какими были в исходной сборке, — модификация их не трогает, но и не очищает: они по-прежнему несут данные той машины, с которой был снят дамп. Об этом — в разделе про содержимое репозитория.
+
+Это границы **правки в файле**. Риск самой процедуры прошивки определяется предупреждениями выше.
 
 > [!TIP]
 > **Читателю, который повторяет.** Том у́же, чем кажется: правка сидит в одном томе, всё остальное — нетронутое. Если у вас другой объём чипа или другая ревизия платы — сначала сверьте свой дамп, не рассчитывайте на совпадение офсетов.
@@ -142,7 +151,7 @@
 
 ### Готовые дампы:
 * `Acer Aspire 5742G.bin` — **оригинальный дамп**, считанный программатором. Он же ваш путь отката. Несёт серийные номера, DMI и ME-регион именно этой машины.
-* `Acer Aspire 5742G-unlock.bin` — модифицированный дамп с разблокированными меню, выставленным Power Limit и новым логотипом.
+* `Acer Aspire 5742G-unlock.bin` — модифицированный дамп с разблокированными меню и новым логотипом.
 
 > [!IMPORTANT]
 > **Для отката используйте СВОЙ дамп.** Файл `Acer Aspire 5742G.bin` содержит DMI и серийники конкретного ноутбука. Если ваша плата отличается по ревизии — не заливайте его.
@@ -290,28 +299,16 @@
 
 ---
 
-### ⚡ ИНСТРУКЦИЯ 3: Power Limit вручную
+### ⚡ Про Power Limit
 
-Пункт спрятан в интерфейсе и штатно выставляется неустойчиво: значение периодически сбрасывается само. Поэтому дефолт проставляется напрямую в байты.
+Вкладка `Power & CPU` в разблокированном BIOS содержит пункт Power Limit. **В проверенных стоковом и модифицированном дампах этого значения нет** — искали побайтово.
 
-**Как найти нужные байты (не гадать):**
+Настройка хранится в переменных NVRAM. Такие переменные могут находиться внутри SPI-образа, но модуль `SetupUtility.bin` содержит только описание формы и допустимый диапазон — не текущее значение машины. Поэтому через него этот пункт не выставляется.
 
-1. Прогоните `SetupUtility.bin` через **IFRExtractor** — у вас уже есть этот файл после шага 1.
-2. Откройте полученный `.txt`, найдите нужный пункт и посмотрите блок `VarStoreInfo` рядом с ним: там указан **смещение переменной в varstore** и **текущее значение по умолчанию**.
-3. Сопоставьте это смещение с содержимым `SetupUtility.bin` в HxD и найдите байты значения.
-4. Запишите туда нужное вам число.
+Правильный путь — интерфейс BIOS, вкладка `Power & CPU`. После перезагрузки проверьте, что значение удержалось: если сбросилось, причина в политике платформы, а не в образе.
 
-**Правила:**
-
-* Правьте **только** байты самого значения. Ничего больше в этом месте не трогайте.
-* Замена должна быть **той же длины**, что и исходное значение, иначе собьётся структура.
-* После правки пересоберите образ через UEFITool (шаг 6), если меняли секцию целиком.
-
-> [!WARNING]
-> Значение по умолчанию — это **стартовое**, а не работающее во время нагрузки. Платформа читает фактический лимит из своего железа, и BIOS тут только инициализатор. Прежде чем считать, что правка дала эффект, сверьте результат на живой машине: снять реальный лимит можно утилитой чтения MSR (например, RWEverything или ThrottleStop) — регистры `0x606` и `0x610`.
-
-> [!TIP]
-> **Почему инструкция не даёт конкретного адреса.** Смещение и набор байт зависят от того, какой именно дамп вы открыли и какая ревизия платы стоит. Адрес из чужой сборки здесь не просто бесполезен, а опасен — вы затрёте соседний пункт и получите форму, которая выглядит живой, а работает через раз. Способ выше даёт правильный адрес для **вашего** файла.
+> [!NOTE]
+> **Не ищите это в `SetupUtility.bin`.** Модуль содержит описание формы и допустимый диапазон значений — но не текущее значение вашей машины. Отсюда и ощущение, что пункт «не выставляется»: через этот модуль он и не может выставляться.
 
 ---
 
@@ -334,7 +331,7 @@
 2. Подключите программатор к ПК по USB (**прищепка пока ни к чему не подключена**) и запустите **AsProgrammer**.
 3. Убедитесь, что программатор виден системе и программе: в выводе не должно быть `Connecting Error CH341(Not found)`. Строка `IC not responding` на этом шаге нормальна — прищепка ещё ни к чему не подключена. Неисправный программатор, воткнутый в чип, способен повредить и сам чип.
 4. **Отключите программатор от USB.**
-5. Подключите прищепку к чипу BIOS. Следите за первой ножкой (pin 1): на большинстве прищепок красный провод — это pin 1, он должен попасть на вывод рядом с меткой (точка или выемка на корпусе чипа).
+5. Подключите прищепку к чипу BIOS. Перед этим убедитесь, что напряжение чипа совместимо с программатором (предупреждение 3). Следите за первой ножкой (pin 1): на большинстве прищепок красный провод — это pin 1, он должен попасть на вывод рядом с меткой (точка или выемка на корпусе чипа).
 6. Только теперь снова подключите программатор к ПК по USB.
 7. `Определить чип` (`Detect`). Чип должен определяться стабильно. Если нет — **сначала отключите USB**, и только потом переставляйте прищепку.
 8. **Обязательно снимите бэкап:** считайте BIOS 2–3 раза и сравните хэши. В Windows: `certutil -hashfile "dump.bin" SHA256`. Файлы должны совпасть. **Пока нет двух совпавших чтений, `Erase` нажимать нельзя.** Скопируйте дамп на второй носитель **до** стирания.
@@ -357,8 +354,8 @@
 Если в поле вывода при `Detect` появляется `Connecting Error CH341(Not found)`, системе не видится сам программатор:
 
 1. **Нет драйвера или поставлен не тот.** Для CH341A их два: `CH341SER` (виртуальный COM) и `CH341PAR` (USB-EPP/I2C). Программатору нужен второй. Если в Диспетчере видно «USB-SERIAL CH341A» — это как раз не тот.
-2. **Виден в Диспетчере, но драйвер не ставится или висит с ошибкой 43.** Программатору конец.
-3. **Никак себя не проявляет, но чип программатора раскаляется.** Тоже конец.
+2. **Виден в Диспетчере, но драйвер не ставится или висит с ошибкой 43.** Код 43 означает, что драйвер сообщил системе о проблеме с устройством. Это ещё не приговор программатору: попробуйте удалить устройство и поставить драйвер заново, затем другой порт. Если после этого картина не изменилась — вероятно, дело в устройстве, и связываться с ним дальше не стоит.
+3. **Никак себя не проявляет, но чип программатора заметно греется.** Скорее всего, программатор неисправен — отключите его и не подключайте обратно, пока не проверите исправность.
 4. **Никакой реакции, не греется, Windows его не видит.** Попробуйте другой USB-порт.
 5. **Программатор определяется, драйвер стоит, контакты подключены, но в выводе только `IC not responding`.** Чип BIOS не отвечает. Первое, что стоит сделать — переставить прищепку и повторить чтение.
 
@@ -402,7 +399,7 @@
   <i>Unlocking the hidden InsydeH2O menus and a custom boot logo — on a 2010 laptop most people have already written off.</i>
 </p>
 
-This repository contains BIOS dumps for the **Acer Aspire 5742G** and a step-by-step guide to unlocking hidden engineering menus (`Advanced` and `Power & CPU`), replacing the boot logo, and patching the Power Limit default by hand.
+This repository contains BIOS dumps for the **Acer Aspire 5742G** and a step-by-step guide to unlocking hidden engineering menus (`Advanced` and `Power & CPU`) and replacing the boot logo.
 
 The method is **Form ID mask substitution inside `SetupUtility`**: the firmware is made to open the engineering form where the stock form used to be.
 
@@ -417,8 +414,8 @@ The method is **Form ID mask substitution inside `SetupUtility`**: the firmware 
 > ### ⚠️ CRITICAL WARNINGS
 > 1. **PROGRAMMER ONLY.** Flash strictly via a hardware programmer (CH341A + clip) or by desoldering the chip.
 > 2. **NO WINDOWS FLASHING.** Stock utilities reject this mod. This model has **no external recovery path in the firmware at all** — verified in practice.
-> 3. **DE-ENERGIZE THE BOARD.** Unplug AC and remove the battery before attaching the clip.
-> 4. **BACK UP FIRST.** Read the original 2–3 times and compare SHA256. Different files mean a crooked clip.
+> 3. **DE-ENERGIZE THE BOARD AND CHECK THE CHIP.** Unplug AC and remove the battery before attaching the clip. While you are there, read the chip marking: **capacity and voltage are different things.** SPI flash of the same capacity comes in 1.8 V and 3 V variants. Power reaches the chip **from the programmer through the clip**, so compare your chip's voltage against the actual output of your specific programmer and adapter — a generic "CH341A is 3.3 V" is not an argument, adapters and mods differ. Also keep in mind that a programmer may back-feed other board rails through the clip. Check the marking against the datasheet for your exact part, not against the series name.
+> 4. **BACK UP FIRST.** Read the original 2–3 times and compare SHA256. **Do not erase or write until two reads match.** A mismatch most often means poor clip contact, but the cause can also be a faulty programmer, a weak supply line, or noise on the ribbon. You do not need to identify the cause — keep reading until two identical files come out.
 > 5. **SPARE PC.** You need a second machine to flash the original dump back.
 > 6. **HARDWARE LIMITS.** Some engineering items are not accepted and revert on reboot — EC policy, a different settings store, or a value the reference code never reads.
 
@@ -456,11 +453,18 @@ Verified by a byte-for-byte comparison against the stock image.
 | 1 | **Menu mask substitution** — `Information` and `Power` swapped places; `Security` and `Advanced` exchanged their form content | `SetupUtility` menu table |
 | 2 | **Bulk option edit** — **155** option default values replaced with `0xFFFF`. The stock image contains none: this is what actually reveals the hidden engineering items | `SetupUtility` forms |
 | 3 | **Cosmetic rename** — `Harddisk Security` became `Harddisk Advanced`; a `Power` label was added, padded to the original string length | Unicode strings in `SetupUtility` |
-| 4 | **Power Limit** — default patched by hand in the hex editor, because the UI item kept resetting itself | `Power & CPU` form |
-| 5 | **Boot logo** — stock splash replaced via H2OEZE | ~201 KB raster block in the DXE volume |
+| 4 | **Boot logo** — stock splash replaced via H2OEZE | ~201 KB raster block in the DXE volume |
 
 > [!IMPORTANT]
 > **Steps 1 and 2 work together.** Swapping masks alone is not enough: the BIOS opens the right form, but its items stay suppressed. The bulk edit to `0xFFFF` lifts that suppression.
+
+### About Power Limit
+
+The Power Limit value was **not found in either the stock or the modified dump** — searched byte by byte.
+
+The setting lives in NVRAM variables. Those may sit inside the SPI image, but that does not make the value editable through `SetupUtility.bin`: the module carries the form description and the acceptable range, not the value your machine is running. The item cannot be set from this module.
+
+Set it directly in the BIOS interface, `Power & CPU` tab, then check that it survives a reboot.
 
 ### Boundaries of the change
 
@@ -470,14 +474,16 @@ Across the whole 4 MB image, **only the DXE firmware volume and 22 bytes of its 
 * Flash descriptor, PEI volume, SMM, boot block — **identical**
 * DMI data and serial numbers — **identical**
 
-No foreign serials or foreign ME are carried in, and rollback comes out clean. These are the boundaries of **the edit in the file** — the risk of the flashing procedure itself is set by the warnings above, not by this list.
+Everything else is confined to the DXE volume. DMI, ME and serials are left exactly as they were in the source build — the modification does not touch them, but it does not scrub them either: they still carry the data of the machine the dump was taken from. See the repository contents section below.
+
+These are the boundaries of **the edit in the file**. The risk of the flashing procedure itself is set by the warnings above.
 
 ---
 
 ## 📁 Repository contents
 
 * `Acer Aspire 5742G.bin` — original dump read with the programmer. Rollback source. It carries this machine's serials, DMI and ME region.
-* `Acer Aspire 5742G-unlock.bin` — modified dump: menus unlocked, Power Limit set, new logo.
+* `Acer Aspire 5742G-unlock.bin` — modified dump: menus unlocked, new logo.
 
 > [!IMPORTANT]
 > **Roll back with YOUR dump.** `Acer Aspire 5742G.bin` contains one specific machine's DMI and serials. If your board revision differs, do not flash it.
@@ -589,28 +595,16 @@ Each affected option carries a record shaped `85 00 01 <value>`:
 
 ---
 
-### ⚡ INSTRUCTION 3: Power Limit by hand
+### ⚡ About Power Limit
 
-The item is buried in the UI and sets unreliably — the value resets itself. So the default is patched directly.
+The `Power & CPU` tab contains a Power Limit item. **That value was not found in either dump checked** — the search was byte by byte.
 
-**How to locate the bytes (without guessing):**
+The setting lives in NVRAM variables. Such variables may reside inside the SPI image, but the `SetupUtility.bin` module contains only the form description and the acceptable range — not the value your machine is running. So this item cannot be set through it.
 
-1. Run `SetupUtility.bin` through **IFRExtractor** — you already have this file from step 1.
-2. Open the `.txt` and find the item; look at the `VarStoreInfo` block near it — it gives the **variable offset in the varstore** and the **current default**.
-3. Map that offset onto `SetupUtility.bin` in HxD and locate the value bytes.
-4. Write in the number you want.
+The right path is the BIOS interface, `Power & CPU` tab. After rebooting, check that the value held: if it reset, the cause is platform policy, not the image.
 
-**Rules:**
-
-* Edit **only** the value bytes. Nothing else at that spot.
-* The replacement must be the **same length** as the original, or the structure breaks.
-* Rebuild through UEFITool (step 6) if you modified the section as a whole.
-
-> [!WARNING]
-> A default value is the **starting point**, not what runs under load. The platform reads the real limit from its own hardware; the BIOS only initialises it. Before treating the patch as effective, verify on the live machine by reading the MSRs (RWEverything or ThrottleStop will do) — registers `0x606` and `0x610`.
-
-> [!TIP]
-> **Why no fixed address is given.** Offset and byte layout depend on which dump you opened and which board revision you have. An address from someone else's build is not just useless here, it is dangerous — you will overwrite the neighbouring option and get a form that looks alive but half-works. The method above yields the correct address for **your** file.
+> [!NOTE]
+> **Do not look for it in `SetupUtility.bin`.** The module holds the form description and the acceptable range — not the value your machine is currently running. That is why the item cannot be set from the image.
 
 ---
 
@@ -629,7 +623,7 @@ The item is buried in the UI and sets unreliably — the value resets itself. So
 2. Connect the programmer to the PC over USB (**clip attached to nothing**) and launch **AsProgrammer**.
 3. The programmer must be seen by the system and the tool: no `Connecting Error CH341(Not found)`. `IC not responding` is normal here — the clip is not attached yet. A faulty programmer connected to the chip can damage it.
 4. **Unplug the programmer from USB.**
-5. Attach the clip to the BIOS chip. Mind pin 1 — on most clips the red wire is pin 1 and must land on the pin next to the marker (dot or notch).
+5. Attach the clip to the BIOS chip. First confirm the chip voltage is compatible with your programmer (warning 3). Mind pin 1 — on most clips the red wire is pin 1 and must land on the pin next to the marker (dot or notch).
 6. Plug the programmer back into USB.
 7. `Detect`. If the chip is not found, **unplug USB first**, then reseat the clip.
 8. **Always back up:** read 2–3 times and compare hashes. `certutil -hashfile "dump.bin" SHA256`. **Do not press `Erase` until two reads match.** Copy the dump to a second drive **before** erasing.
@@ -648,8 +642,8 @@ The item is buried in the UI and sets unreliably — the value resets itself. So
 ## 🔍 Programmer not detected? Check in this order
 
 1. **No driver, or the wrong one.** Two drivers exist for CH341A: `CH341SER` (virtual COM) and `CH341PAR` (USB-EPP/I2C). You need the second. «USB-SERIAL CH341A» in Device Manager is the wrong one.
-2. **Visible in Device Manager but the driver refuses to install, or error 43.** Programmer is done.
-3. **No signs of life but the programmer's chip gets very hot.** Also done.
+2. **Visible in Device Manager, but the driver refuses to install, or error 43.** Code 43 means the driver reported a problem with the device to the system. That is not yet a verdict on the programmer: try removing the device and reinstalling the driver, then try another port. If nothing changes afterwards, the device is probably faulty and should not be trusted with a chip.
+3. **No signs of life, but the programmer's chip gets noticeably hot.** Most likely a faulty programmer — unplug it and do not reconnect until you have confirmed it works.
 4. **No reaction at all, not warm, Windows does not see it.** Try another USB port.
 5. **Detected, driver fine, contacts attached, but output shows only `IC not responding`.** The chip is not answering. Reseat the clip and read again first.
 
