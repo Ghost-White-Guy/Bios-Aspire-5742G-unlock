@@ -202,12 +202,21 @@ HEX-коды меню из SetupUtility
   <summary><b>🔌 Инструкция по прошивке</b></summary>
   <br>
 
-1. Откройте **AsProgrammer**.
-2. Очистите чип памяти на материнской плате ноутбука.
-3. Откройте финальный `mod_bios.rom` и запишите его на чип. 
-4. Дождитесь окончания верификации.
-5. Проверьте свой ноутбук на включение и вход в BIOS и Систему перед сборкой.
-6. Если всё хорошо, то смело собирайте ноутбук. Готово!
+1. Выключите ноутбук, отключите блок питания и **снимите аккумулятор**.
+2. Подключите программатор к компьютеру по USB (**прищепка при этом ни к чему не подключена**) и запустите **AsProgrammer**.
+3. Убедитесь, что программатор исправен и определяется в программе без ошибок. Неисправный программатор, подключённый к чипу, может повредить чип BIOS и прошивку на нём.
+4. **Отключите программатор от USB.**
+5. Подключите прищепку к чипу BIOS. Следите за правильным положением первой ножки (pin 1) и плотностью контакта. (Красный провод (на большинстве прищепок) — это первая ножка (pin 1), он должен попасть ровно на тот вывод чипа, рядом с которым находится метка первой ножки: точка или выемка на корпусе.)
+6. Только теперь снова подключите программатор к компьютеру по USB.
+7. Нажмите `Detect` и убедитесь, что чип определяется стабильно и без ошибок. Если чип не определяется, **сначала отключите USB**, и только потом переставляйте прищепку.
+8. **Обязательно** сделайте бэкап оригинального BIOS: считайте его минимум 2-3 раза, сохраните файлы и сравните их хэш-суммы. Файлы должны быть абсолютно идентичны.
+9. Откройте файл `mod_bios.rom` (`File` -> `Open`).
+10. Очистите чип (`Erase`).
+11. Запишите прошивку на чип (`Write`).
+12. Дождитесь окончания верификации (`Verify`). Она должна завершиться без ошибок.
+13. **Сначала отключите программатор от USB**, затем снимите прищепку с чипа.
+14. Установите аккумулятор (или подключите шнур питания к розетке), включите ноутбук и проверьте запуск, вход в BIOS и загрузку системы **до полной сборки**.
+15. Если всё в порядке, смело собирайте ноутбук. Готово!
 
 </details>
 
@@ -423,12 +432,21 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
   <summary><b>🔌 Flashing instructions</b></summary>
   <br>
 
-1. Open **AsProgrammer**.
-2. Erase the memory chip on the laptop motherboard.
-3. Open the final `mod_bios.rom` and write it to the chip. 
-4. Wait for the verification to finish.
-5. Check your laptop for turning on and entering the BIOS and System before reassembling.
-6. If everything is fine, then safely assemble the laptop. Done!
+1. Turn off the laptop, disconnect the power adapter and **remove the battery**.
+2. Connect the programmer to your computer via USB (**the clip must not be attached to anything yet**) and launch **AsProgrammer**.
+3. Make sure the programmer is working and is detected by the software without errors. A faulty programmer connected to the chip can damage the BIOS chip and the firmware on it.
+4. **Disconnect the programmer from USB.**
+5. Attach the clip to the BIOS chip. Make sure pin 1 is aligned correctly and the contact is firm. (On most clips, the red wire is pin 1 and must land exactly on the chip pin next to the pin 1 marker: a dot or notch on the chip body.)
+6. Only now connect the programmer to your computer via USB again.
+7. Click `Detect` and make sure the chip is detected reliably and without errors. If the chip is not detected, **unplug USB first**, and only then reseat the clip.
+8. **Always** back up the original BIOS: read it at least 2-3 times, save the files and compare their hash sums. The files must be absolutely identical.
+9. Open the `mod_bios.rom` file (`File` -> `Open`).
+10. Erase the chip (`Erase`).
+11. Write the firmware to the chip (`Write`).
+12. Wait for the verification to finish (`Verify`). It must complete without errors.
+13. **First disconnect the programmer from USB**, then remove the clip from the chip.
+14. Reinstall the battery (or connect the power adapter to an outlet), power on the laptop and check that it starts, enters the BIOS and boots the system **before reassembling**.
+15. If everything is fine, you can safely reassemble the laptop. Done!
 
 </details>
 
