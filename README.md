@@ -11,14 +11,14 @@
 [![Инструкция по прошивке](https://img.shields.io/badge/🔌_Инструкция-по_прошивке-red?style=for-the-badge)](#flash-ru)
 
 <h2 id="ru">🇷🇺 Русский (Описание)</h2>
-В данном репозитории находятся дампы BIOS для ноутбука Acer Aspire 5742G, а также подробная пошаговая инструкция по самостоятельной разблокировке скрытых инженерных меню (Advanced и Power), замене загрузочного логотипа и глубокой низкоуровневой оптимизации. Данная модификация (Acer PEW71 bios modification) позволяет получить полный контроль над системой, решить проблемы с перегревом (Acer 5742G thermal throttling fix) и навсегда отключить встроенные системы слежения (InsydeH2O Computrace disable). Идеально подходит для тех, кто ищет чистый LA-5894P dump.
+В данном репозитории находятся дампы BIOS для ноутбука Acer Aspire 5742G, а также подробная пошаговая инструкция по самостоятельной разблокировке скрытых инженерных меню (Advanced и Power), замене загрузочного логотипа и глубокой низкоуровневой оптимизации. Данная модификация (Acer PEW71 bios modification) позволяет получить доступ к скрытым меню настроек, снять сброс частот из-за лимита мощности (Acer 5742G power limit unlock) и отключить встроенные модули слежения и антикражи (Computrace, Intel TDT).
 
-**🔍 Ключевые слова для поиска:** LA-5894P dump, Acer 5742G thermal throttling fix, InsydeH2O Computrace disable, Acer PEW71 bios modification.
+**🔍 Ключевые слова для поиска:** LA-5894P dump, Acer 5742G power limit unlock, InsydeH2O Computrace disable, Acer PEW71 bios modification, Acer 5742G BIOS unlock.
 
 > [!CAUTION]
 > ### ⚠️ КРИТИЧЕСКИЕ ПРЕДУПРЕЖДЕНИЯ (ЧИТАТЬ ОБЯЗАТЕЛЬНО!)
 > 1. **ТОЛЬКО ПРОГРАММАТОР:** Прошивка модифицированного BIOS должна производиться **СТРОГО** через аппаратный программатор (например, CH341A) с прищепкой или через выпаивание чипа памяти. 
-> 2. **НЕТ ПРОШИВКЕ ИЗ WINDOWS:** Попытка прошить этот мод через штатные утилиты (InsydeFlash и др.) из-под ОС приведет к ошибке контрольных сумм / проверке цифровой подписи и гарантированному **«окирпичиванию»** ноутбука.
+> 2. **НЕТ ПРОШИВКЕ ИЗ WINDOWS:** Попытка прошить этот мод через штатные утилиты (InsydeFlash и др.) из-под ОС приведёт к ошибке контрольных сумм / проверке цифровой подписи и, скорее всего, к **«окирпичиванию»** ноутбука.
 > 3. **ОБЕСТОЧЬТЕ ПЛАТУ:** Перед подключением прищепки программатора к чипу **ОБЯЗАТЕЛЬНО** отключите блок питания и снимите аккумуляторную батарею с ноутбука. 
 > 4. **СДЕЛАЙТЕ БЭКАП:** Прежде чем что-то зашивать, считайте свой оригинальный BIOS через программатор минимум 2-3 раза. Сохраните эти файлы и проверьте, чтобы они были абсолютно идентичны (совпадали хэш-суммы). Если файлы разные — прищепка установлена криво, считывать и шить так нельзя!
 > 5. **ЗАПАСНОЙ ПК:** Не приступайте к прошивке модифицированного BIOS, если у вас нет под рукой второго рабочего компьютера/ноутбука. В случае ошибки вам понадобится второе устройство, чтобы прошить оригинальный дамп обратно.
@@ -64,26 +64,25 @@
 
 ---
 
-## 🔥 PRO-модификация: Обновление микрокодов, AHCI и тотальная очистка
+## 🔥 Расширенная модификация: микрокоды, AHCI и удаление лишних модулей
 
-В модифицированном дампе `Acer Aspire 5742G-unlock.bin` не только разблокированы инженерные меню, но и проведена глубокая низкоуровневая оптимизация DXE-драйверов. Чтобы освободить место в чипе памяти для новых модулей, была произведена зачистка «мусора» и аппаратных трекеров.
+В модифицированном дампе `Acer Aspire 5742G-unlock.bin` не только разблокированы инженерные меню, но и проведена глубокая низкоуровневая оптимизация DXE-драйверов. Чтобы освободить место в чипе памяти для новых модулей, была произведена зачистка «мусора» и модулей слежения.
 
 ### 🗑️ Что было удалено (Освобождение места и безопасность):
-* **Аппаратные трекеры и телеметрия:** Полностью вырезаны модули `ComputraceSMI`, `Computrace`, а также `Tdt`, `TdtUsbWdm` и `Tdt3g` (Intel Anti-Theft Technology). В BIOS больше нет встроенных закладок для отслеживания ноутбука.
+* **Модули слежения и антикражи:** Полностью вырезаны модули `ComputraceSMI`, `Computrace`, а также `Tdt`, `TdtUsbWdm` и `Tdt3g` (Intel Anti-Theft Technology). Встроенные в BIOS модули отслеживания ноутбука удалены.
 * **Лишние локализации и устаревший код:** Удален `Chinese` (китайский язык) и модуль `Ebc`.
 * **Лишние модули:** Вырезан `57780M`.
 
 ### 🚀 Что было добавлено и обновлено:
 * **Поддержка процессора:** Добавлен модуль `MicrocodeUpdate`. Интегрированы свежие микрокоды для повышения стабильности работы процессора (в т.ч. Intel Core i5).
 * **Новые полезные DXE-модули:**
-  * `MeFwDowngrade` — разблокирует возможность программного понижения версии прошивки Intel Management Engine (Intel ME).
   * `TgaDecoder` и `PrePostHotkey`.
 
-### 🚀 PRO-Тюнинг (Максимальная производительность процессора):
-В базовом `mod_bios.rom` установлены консервативные настройки. Для раскрытия полного потенциала процессоров i5/i7 (работа Turbo Boost) настоятельно рекомендуются следующие ручные настройки:
+### 🚀 Рекомендуемые настройки процессора (Turbo Boost):
+В `mod_bios.rom` по умолчанию заданы безопасные значения. Для работы Turbo Boost на i5/i7 рекомендуется вручную:
 * **Шаг 1:** В `Power & CPU -> Security CPU Control` ОБЯЗАТЕЛЬНО включите C-States (`[Enabled]`). Без этого Turbo Boost не сможет поднимать частоты!
 * **Шаг 2:** В `Advanced -> Chipset Configuration` установите QPI Frequency на максимальные `[6.400 GT]`.
-* **Шаг 3:** Power Limit уже изменён на 800 (80 ВАТТ) по умолчанию для предотвращения сброса частот под высокой нагрузкой. Следите за температурами!
+* **Шаг 3:** Power Limit по умолчанию увеличен до 800 (80 Вт), чтобы частота не сбрасывалась из-за лимита мощности. Это повышает нагрев: следите за температурами и состоянием системы охлаждения.
 
 ---
 
@@ -91,7 +90,7 @@
 
 ### Готовые дампы прошивок и модули:
 * `Acer Aspire 5742G.bin` — Оригинальный (чистый) дамп BIOS, считанный программатором. Используйте для отката в случае проблем.
-* `Acer Aspire 5742G-unlock.bin` — Модифицированный дамп с разблокированными меню `Advanced` (вместо `Security`) и `Power & CPU` (вместо `Information`), а также всеми встроенными оптимизациями (PRO-мод).
+* `Acer Aspire 5742G-unlock.bin` — Модифицированный дамп с разблокированными меню `Advanced` (вместо `Security`) и `Power & CPU` (вместо `Information`), а также всеми встроенными оптимизациями.
 * **`DXE_Modules_Pack.7z`** — Пакет чистых, извлеченных `.ffs` модулей (AHCI, Microcodes, Xhci и др.) для тех, кто хочет интегрировать их в свой BIOS вручную.
 
 ### 🧰 Необходимый инструментарий (Уже в репозитории)
@@ -174,7 +173,8 @@ HEX-коды меню из SetupUtility
 Для тех, кто скачал `DXE_Modules_Pack.7z` и хочет вшить драйверы (AHCI, Microcodes) в свой дамп вручную через **UEFITool**.
 
 1. **Проверка на дубликаты (Важно!):** Перед вставкой обязательно воспользуйтесь поиском в UEFITool, чтобы проверить, нет ли уже такого модуля в вашем BIOS.
-2. **ЕСЛИ МОДУЛЬ УЖЕ ЕСТЬ (Замена):** * Нажмите на него правой кнопкой мыши и выберите **`Replace`** (Заменить), выбрав файл из архива. 
+2. **ЕСЛИ МОДУЛЬ УЖЕ ЕСТЬ (Замена):**
+   * Нажмите на него правой кнопкой мыши и выберите **`Replace`** (Заменить), выбрав файл из архива.
    * *Примечание: Заменяйте файл целиком (0h выравнивание). Не пугайтесь, если увидите системные ссылки или предупреждения о смещениях — UEFITool всё пересчитает корректно. Главное — не дублировать модули!*
 3. **ЕСЛИ МОДУЛЯ НЕТ (Вставка нового):**
    * Разверните основной том с драйверами DXE.
@@ -209,10 +209,10 @@ HEX-коды меню из SetupUtility
 2. Подключите программатор к компьютеру по USB (**прищепка при этом ни к чему не подключена**) и запустите **AsProgrammer**.
 3. Убедитесь, что программатор исправен и определяется в программе без ошибок. Неисправный программатор, подключённый к чипу, может повредить чип BIOS и прошивку на нём.
 4. **Отключите программатор от USB.**
-5. Подключите прищепку к чипу BIOS. Следите за правильным положением первой ножки (pin 1) и плотностью контакта. (На большинстве прищепок красный провод — это первая ножка (pin 1), он должен попасть ровно на тот вывод чипа, рядом с которым находится метка первой ножки: точка или выемка на корпусе.)
+5. Подключите прищепку к чипу BIOS. Следите за правильным положением первой ножки (pin 1) и плотностью контакта. На большинстве прищепок красный провод — это первая ножка (pin 1), он должен попасть ровно на тот вывод чипа, рядом с которым находится метка первой ножки: точка или выемка на корпусе.
 6. Только теперь снова подключите программатор к компьютеру по USB.
 7. Нажмите `Detect` и убедитесь, что чип определяется стабильно и без ошибок. Если чип не определяется, **сначала отключите USB**, и только потом переставляйте прищепку.
-8. **Обязательно** сделайте бэкап оригинального BIOS: считайте его минимум 2-3 раза, сохраните файлы и сравните их хэш-суммы. Файлы должны быть абсолютно идентичны.
+8. **Обязательно** сделайте бэкап оригинального BIOS: считайте его минимум 2-3 раза, сохраните файлы и сравните их хэш-суммы. Файлы должны быть абсолютно идентичны. Проверить хэши в Windows (cmd или PowerShell): `certutil -hashfile "дамп.bin" SHA256` — выполните команду для каждого считанного файла и сравните значения SHA256.
 9. Откройте файл модифицированного BIOS: **Acer Aspire 5742G-unlock.bin** (или ваш **mod_bios.rom**, если собирали самостоятельно) через File -> Open.
 10. Очистите чип (`Erase`).
 11. Запишите прошивку на чип (`Write`).
@@ -221,7 +221,20 @@ HEX-коды меню из SetupUtility
 14. Установите аккумулятор (или подключите шнур питания к розетке), включите ноутбук и проверьте запуск, вход в BIOS и загрузку системы **до полной сборки**.
 15. Если всё в порядке, смело собирайте ноутбук. Готово!
 
+
 </details>
+
+---
+
+## 🚑 Если ноутбук не включился после прошивки
+
+Не паникуйте: в большинстве случаев чип жив, и его можно перезаписать.
+
+1. **Проверьте, что дамп считан целиком.** Размер считанного файла должен совпадать с объёмом чипа (например, 4 МБ = 4 194 304 байта). Обрезанный или пустой дамп — почти всегда плохой контакт прищепки.
+2. **Пересядьте прищепку и перечитайте чип.** Отключите программатор от USB, снимите прищепку, выставьте её по метке первой ножки (pin 1) и повторите чтение 2–3 раза — файлы должны совпасть по SHA256 (`certutil -hashfile "дамп.bin" SHA256`).
+3. **Зашейте обратно оригинальный дамп.** Сначала `Erase`, затем `Write`, и дождитесь `Verify` без ошибок. Ноутбук должен запуститься как раньше.
+4. **Никогда не шейте со вставленной батареей и подключённым питанием.** Это самая частая причина испорченной записи и «кирпича».
+5. **Отличите плохой контакт от неисправного программатора.** Если чтение даёт мусор — программатор исправен, просто прищепка плохо держится на чипе: снимите её, выставьте заново и повторите. Неисправный программатор выглядит иначе: ошибки по питанию, «не определился системой», программа постоянно выдаёт ошибку, а микросхема программатора заметно греется. В этом случае отключите его от платы и не подключайте обратно, пока не убедитесь в исправности.
 
 [ ⬆️ Вернуться к началу ](#n)
 
@@ -244,14 +257,14 @@ HEX-коды меню из SetupUtility
 
 [![Flashing instructions](https://img.shields.io/badge/🔌_Instructions-Flashing-red?style=for-the-badge)](#flash-en)
 
-This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with a detailed step-by-step guide for manually unlocking hidden engineering menus (Advanced and Power), replacing the boot logo, and performing low-level optimizations. This modification (Acer PEW71 bios modification) gives you full control over your system, helps resolve overheating issues (Acer 5742G thermal throttling fix), and permanently removes built-in tracking systems (InsydeH2O Computrace disable). Perfect for those looking for a clean LA-5894P dump.
+This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with a detailed step-by-step guide for manually unlocking hidden engineering menus (Advanced and Power), replacing the boot logo, and performing low-level optimizations. This modification (Acer PEW71 bios modification) gives you access to hidden settings menus, removes frequency drops caused by the power limit (Acer 5742G power limit unlock), and disables built-in tracking and anti-theft modules (Computrace, Intel TDT).
 
-**🔍 Search Keywords:** LA-5894P dump, Acer 5742G thermal throttling fix, InsydeH2O Computrace disable, Acer PEW71 bios modification.
+**🔍 Search Keywords:** LA-5894P dump, Acer 5742G power limit unlock, InsydeH2O Computrace disable, Acer PEW71 bios modification, Acer 5742G BIOS unlock.
 
 > [!CAUTION]
 > ### ⚠️ CRITICAL WARNINGS (MUST READ!)
 > 1. **PROGRAMMER ONLY:** Flashing the modified BIOS must be done **STRICTLY** via a hardware programmer (e.g., CH341A) with a clip or by desoldering the memory chip.
-> 2. **NO WINDOWS FLASHING:** Attempting to flash this mod using standard utilities (InsydeFlash, etc.) from the OS will result in a checksum/digital signature verification error and will guarantee a **"bricked"** laptop.
+> 2. **NO WINDOWS FLASHING:** Attempting to flash this mod using standard utilities (InsydeFlash, etc.) from the OS will cause a checksum/digital signature verification error and will most likely leave you with a **"bricked"** laptop.
 > 3. **DE-ENERGIZE THE BOARD:** Before connecting the programmer clip to the chip, you **MUST** disconnect the power supply and remove the battery from the laptop.
 > 4. **MAKE A BACKUP:** Before flashing anything, read your original BIOS via the programmer at least 2-3 times. Save these files and check that they are absolutely identical (hash sums match). If the files are different, the clip is seated crookedly; do not read or flash like this!
 > 5. **SPARE PC:** Do not start flashing the modified BIOS if you do not have a second working PC/laptop at hand. In case of an error, you will need a second device to flash the original dump back.
@@ -297,26 +310,25 @@ This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with
 
 ---
 
-## 🔥 PRO-modification: Microcode updates, AHCI, and total cleanup
+## 🔥 Extended modification: microcodes, AHCI and module cleanup
 
-In the modified dump `Acer Aspire 5742G-unlock.bin`, not only are the engineering menus unlocked, but deep low-level optimization of DXE drivers has also been performed. To free up space in the memory chip for new modules, "garbage" and hardware trackers were cleaned out.
+In the modified dump `Acer Aspire 5742G-unlock.bin`, not only are the engineering menus unlocked, but deep low-level optimization of DXE drivers has also been performed. To free up space in the memory chip for new modules, "garbage" and tracking modules were cleaned out.
 
 ### 🗑️ What was removed (Freeing space and security):
-* **Hardware trackers and telemetry:** `ComputraceSMI`, `Computrace`, as well as `Tdt`, `TdtUsbWdm`, and `Tdt3g` (Intel Anti-Theft Technology) modules were completely cut out. The BIOS no longer has built-in backdoors for tracking the laptop.
+* **Tracking and anti-theft modules:** `ComputraceSMI`, `Computrace`, as well as `Tdt`, `TdtUsbWdm`, and `Tdt3g` (Intel Anti-Theft Technology) modules were completely cut out. The BIOS's built-in laptop tracking modules have been removed.
 * **Extra localizations and outdated code:** `Chinese` language and the `Ebc` module were removed.
 * **Extra modules:** `57780M` was cut out.
 
 ### 🚀 What was added and updated:
 * **Processor support:** Added `MicrocodeUpdate` module. Integrated fresh microcodes to improve processor stability (including Intel Core i5).
 * **New useful DXE modules:**
-  * `MeFwDowngrade` — unlocks the ability to software-downgrade the Intel Management Engine (Intel ME) firmware version.
   * `TgaDecoder` and `PrePostHotkey`.
 
-### 🚀 PRO-Tuning (Maximum processor performance):
-Conservative settings are set in the base `mod_bios.rom`. To unlock the full potential of i5/i7 processors (Turbo Boost operation), the following manual settings are highly recommended:
+### 🚀 Recommended CPU settings (Turbo Boost):
+`mod_bios.rom` ships with safe default values. To make Turbo Boost work on i5/i7, the following settings are recommended manually:
 * **Step 1:** In `Power & CPU -> Security CPU Control`, you MUST enable C-States (`[Enabled]`). Without this, Turbo Boost will not be able to raise frequencies!
 * **Step 2:** In `Advanced -> Chipset Configuration`, set QPI Frequency to the maximum `[6.400 GT]`.
-* **Step 3:** Power Limit is already changed to 800 (80 WATTS) by default to prevent throttling under high load. Monitor your temperatures!
+* **Step 3:** Power Limit is increased to 800 (80 W) by default so the frequency does not drop because of the power limit. This raises heat output: watch your temperatures and the condition of the cooling system.
 
 ---
 
@@ -324,7 +336,7 @@ Conservative settings are set in the base `mod_bios.rom`. To unlock the full pot
 
 ### Ready-made firmware dumps and modules:
 * `Acer Aspire 5742G.bin` — Original (clean) BIOS dump, read by a programmer. Use to roll back in case of problems.
-* `Acer Aspire 5742G-unlock.bin` — Modified dump with unlocked `Advanced` (instead of `Security`) and `Power & CPU` (instead of `Information`) menus, as well as all built-in optimizations (PRO-mod).
+* `Acer Aspire 5742G-unlock.bin` — Modified dump with unlocked `Advanced` (instead of `Security`) and `Power & CPU` (instead of `Information`) menus, as well as all built-in optimizations.
 * **`DXE_Modules_Pack.7z`** — A pack of clean, extracted `.ffs` modules (AHCI, Microcodes, Xhci, etc.) for those who want to integrate them into their BIOS manually.
 
 ### 🧰 Required Tools (Already in the repository)
@@ -405,7 +417,8 @@ HEX-codes of menus from SetupUtility
 For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, Microcodes) into their dump manually via **UEFITool**.
 
 1. **Check for duplicates (Important!):** Before inserting, make sure to use the search in UEFITool to check if such a module already exists in your BIOS.
-2. **IF THE MODULE ALREADY EXISTS (Replacement):** * Right-click on it and select **`Replace`**, choosing the file from the archive. 
+2. **IF THE MODULE ALREADY EXISTS (Replacement):**
+   * Right-click on it and select **`Replace`**, choosing the file from the archive.
    * *Note: Replace the file entirely (0h alignment). Do not be alarmed if you see system links or offset warnings — UEFITool will recalculate everything correctly. The main thing is not to duplicate modules!*
 3. **IF THE MODULE IS MISSING (Inserting a new one):**
    * Expand the main volume with DXE drivers.
@@ -442,10 +455,10 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 2. Connect the programmer to your computer via USB (**the clip must not be attached to anything yet**) and launch **AsProgrammer**.
 3. Make sure the programmer is working and is detected by the software without errors. A faulty programmer connected to the chip can damage the BIOS chip and the firmware on it.
 4. **Disconnect the programmer from USB.**
-5. Attach the clip to the BIOS chip. Make sure pin 1 is aligned correctly and the contact is firm. (On most clips, the red wire is pin 1 and must land exactly on the chip pin next to the pin 1 marker: a dot or notch on the chip body.)
+5. Attach the clip to the BIOS chip. Make sure pin 1 is aligned correctly and the contact is firm. On most clips, the red wire is pin 1 and must land exactly on the chip pin next to the pin 1 marker: a dot or notch on the chip body.
 6. Only now connect the programmer to your computer via USB again.
 7. Click `Detect` and make sure the chip is detected reliably and without errors. If the chip is not detected, **unplug USB first**, and only then reseat the clip.
-8. **Always** back up the original BIOS: read it at least 2-3 times, save the files and compare their hash sums. The files must be absolutely identical.
+8. **Always** back up the original BIOS: read it at least 2-3 times, save the files and compare their hash sums. The files must be absolutely identical. To compare hashes in Windows (cmd or PowerShell): `certutil -hashfile "dump.bin" SHA256` — run it for every read file and compare the SHA256 values.
 9. Open the modified BIOS file: **Acer Aspire 5742G-unlock.bin** (or your **mod_bios.rom** if you compiled it yourself) via File -> Open.
 10. Erase the chip (`Erase`).
 11. Write the firmware to the chip (`Write`).
@@ -454,7 +467,20 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 14. Reinstall the battery (or connect the power adapter to an outlet), power on the laptop and check that it starts, enters the BIOS and boots the system **before reassembling**.
 15. If everything is fine, you can safely reassemble the laptop. Done!
 
+
 </details>
+
+---
+
+## 🚑 If the laptop does not turn on after flashing
+
+Don't panic: in most cases the chip is alive and can be rewritten.
+
+1. **Check that the dump was read completely.** The size of the read file must match the chip capacity (e.g., 4 MB = 4,194,304 bytes). A truncated or empty dump almost always means poor clip contact.
+2. **Reseat the clip and read the chip again.** Disconnect the programmer from USB, remove the clip, realign it by the pin 1 marker, and repeat the read 2–3 times — the files must match by SHA256 (`certutil -hashfile "dump.bin" SHA256`).
+3. **Flash the original dump back.** `Erase` first, then `Write`, and wait for `Verify` to finish without errors. The laptop should boot as before.
+4. **Never flash with the battery inserted or the power adapter connected.** This is the most common cause of corrupted writes and a "brick".
+5. **Tell bad contact from a faulty programmer.** If reads come back as garbage, the programmer is fine — the clip is just not seated firmly on the chip: remove it, realign it and read again. A faulty programmer looks different: power errors, "not detected by the system", the software keeps throwing errors, and the programmer's own chip gets noticeably hot. In that case, disconnect it from the board and do not connect it back until you have confirmed it works.
 
 [ ⬆️ Back to English start ](#en)
 
