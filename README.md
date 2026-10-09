@@ -113,9 +113,13 @@
 | # | Что сделано | Где в образе |
 |---|---|---|
 | 1 | **Подмена масок в меню** — форма `Information` и форма `Power` поменялись местами; формы `Security` и `Advanced` обменялись содержимым | модуль `SetupUtility`, таблица меню |
-| 2 | **Косметическое переименование** — пункт `Harddisk Security` стал `Harddisk Advanced`, добавлена подпись `Power` с выравниванием по длине | строки (Unicode) в `SetupUtility` |
-| 3 | **Power Limit** — значение по умолчанию проставлено вручную через hex-редактор (`800`), потому что в интерфейсе пункт выставлялся некорректно и периодически сбивался | форма `Power & CPU` |
-| 4 | **Загрузочный логотип** — штатная заставка заменена на свою (H2OEZE) | блок растра ≈ 201 КБ в DXE-томе |
+| 2 | **Массовая правка пунктов** — **155** значений по умолчанию в формах заменены на `0xFFFF`. В стоковом образе таких значений нет ни одного: это то, что реально открывает скрытые инженерные пункты | формы `SetupUtility` |
+| 3 | **Косметическое переименование** — пункт `Harddisk Security` стал `Harddisk Advanced`, добавлена подпись `Power` с выравниванием по длине | строки (Unicode) в `SetupUtility` |
+| 4 | **Power Limit** — значение по умолчанию проставлено вручную через hex-редактор, потому что в интерфейсе пункт выставлялся некорректно и периодически сбивался | форма `Power & CPU` |
+| 5 | **Загрузочный логотип** — штатная заставка заменена на свою (H2OEZE) | блок растра ≈ 201 КБ в DXE-томе |
+
+> [!IMPORTANT]
+> **Пункты 1 и 2 работают в связке.** Одной подмены масок недостаточно: BIOS начнёт открывать нужную форму, но её пункты останутся подавленными. Массовая правка на `0xFFFF` снимает это подавление.
 
 ### Границы правки
 
@@ -125,7 +129,7 @@
 * Flash descriptor, PEI-том, SMM, загрузочный блок — **идентичны**
 * DMI-данные и серийные номера — **идентичны**
 
-То есть образ не тащит в себе чужие серийники и чужой ME, откат чистый, и риск ограничен одним томом.
+То есть образ не тащит в себе чужие серийники и чужой ME, и откат получается чистым. Это границы **правки в файле** — риск самой процедуры прошивки определяется предупреждениями выше, а не этим списком.
 
 > [!TIP]
 > **Читателю, который повторяет.** Том у́же, чем кажется: правка сидит в одном томе, всё остальное — нетронутое. Если у вас другой объём чипа или другая ревизия платы — сначала сверьте свой дамп, не рассчитывайте на совпадение офсетов.
@@ -196,13 +200,17 @@
 | на месте `Advanced` | запись `Security` |
 
 > [!CAUTION]
-> ### 🛑 Меняйте **ПО АДРЕСУ**, а не через Replace All
-> Если делать замены подряд через «Replace All», вторая замена словит первую и вы вернётесь к исходному файлу — либо получите две ссылки на одну форму и BIOS зависнет. Правильный порядок:
+> ### 🛑 Меняйте **ПО АДРЕСУ**, и сначала сохраните обе записи
+> Если делать замены подряд через «Replace All», вторая замена словит первую и вы вернётесь к исходному файлу — либо получите две ссылки на одну форму и BIOS зависнет. По адресу тоже нельзя идти в лоб: вставив **A** на место **B**, вы затрёте оригинал **B**, и на следующем шаге вставлять будет нечего.
+>
+> Правильный порядок:
 > 1. Найдите адрес записи **A** и адрес записи **B** (поиск по байтовой последовательности).
-> 2. Скопируйте последовательность **A** в буфер обмена.
-> 3. По адресу **B** вставьте **A**.
-> 4. По адресу **A** вставьте **B**.
-> 5. Сохраните.
+> 2. Скопируйте **A** в отдельный текстовый файл.
+> 3. Скопируйте **B** в **другой** отдельный файл. Теперь обе под originals у вас на руках.
+> 4. По адресу **B** вставьте содержимое файла **A**.
+> 5. По адресу **A** вставьте содержимое файла **B**.
+> 6. Проверьте: по обоим адресам теперь стоят чужие записи, обе — ровно по 36 байт.
+> 7. Сохраните.
 
 **Все маски (Compal LA-5894P):**
 
@@ -223,7 +231,31 @@
 > [!IMPORTANT]
 > **Размер `SetupUtility.bin` не должен измениться ни на байт.** Только «вставить с заменой» (Overwrite). Вставка со сдвигом ломает модуль.
 
-#### Шаг 4: Косметическое переименование (опционально)
+#### Шаг 4: Массовая правка пунктов на `0xFFFF`
+
+Подмена масок открывает нужную форму, но её пункты остаются подавленными — вкладка появляется, а внутри пусто. Снимается это массовой правкой.
+
+Что происходит в forms-описании: у пункта есть запись вида `85 00 01 <значение>`:
+
+| | сток | после правки |
+|---|---|---|
+| одиночный пункт | `85 00 01 02 00` | `85 00 01 ff 00` |
+| группа из пяти | `85 00 01 05 00 00 00 01 00 02 00 03 00 04 00` | `85 00 01 ff 00 ff 00 ff 00 ff 00 ff 00` |
+
+**Как искать:**
+
+1. В HxD откройте `SetupUtility.bin` → `Ctrl+H` → режим **Hex-values**.
+2. Ищите по байтовой последовательности `85 00 01`.
+3. Найденные вхождения разбирайте по одному: смотрите, что стоит после третьего байта.
+4. Значения вида `02 00`, `05 00 00 00 01 00 02 00 03 00 04 00` и им подобные заменяйте на `ff 00` (по два байта на каждое значение).
+5. Уже стоящие `ff 00` **не трогайте** — повторная запись ничего не меняет.
+
+**Сколько всего.** В стоковом `SetupUtility` таких записей — **194**, из них к правке относятся **155**. Остальные оставьте как есть: они не относятся к скрытым пунктам и ломают форму, если заменить их без разбора.
+
+> [!WARNING]
+> **Не заменяйте подряд через Replace All.** Последовательность `85 00 01` встречается и в других конструкциях IFR, где следом идут не значения пунктов. Каждое вхождение смотрите глазами. Ошибка здесь даёт либо неработающую форму, либо BIOS, который не стартует.
+
+#### Шаг 5: Косметическое переименование (опционально)
 Текст хранится в Unicode, длина строки значения не меняется.
 
 * **Security → Advanced:**
@@ -236,7 +268,7 @@
 > [!WARNING]
 > **Не делайте Replace All по слову `Power` по всему файлу.** Оно встречается и в системных переменных. Глобальная замена ломает структуру ссылок — BIOS зависает или рисует мусор. Точечная замена по найденному адресу безопасна.
 
-#### Шаг 5: Сборка (UEFITool)
+#### Шаг 6: Сборка (UEFITool)
 1. В **UEFITool** найдите секцию `SetupUtility` → правой кнопкой по *PE32 image section* → **Replace body** → ваш `SetupUtility.bin`.
 2. `File` → **Save image file** (`mod_bios.rom`).
 
@@ -260,15 +292,26 @@
 
 ### ⚡ ИНСТРУКЦИЯ 3: Power Limit вручную
 
-Пункт спрятан в интерфейсе и штатно выставляется неустойчиво, поэтому значение по умолчанию проставляется напрямую:
+Пункт спрятан в интерфейсе и штатно выставляется неустойчиво: значение периодически сбрасывается само. Поэтому дефолт проставляется напрямую в байты.
 
-1. Откройте `mod_bios.rom` в **HxD**.
-2. Найдите пункт Power Limit в форме `Power & CPU`.
-3. Проставьте значение **800** в байтах дефолта.
-4. Сохраните, затем пересоберите образ через UEFITool, если меняли секцию.
+**Как найти нужные байты (не гадать):**
+
+1. Прогоните `SetupUtility.bin` через **IFRExtractor** — у вас уже есть этот файл после шага 1.
+2. Откройте полученный `.txt`, найдите нужный пункт и посмотрите блок `VarStoreInfo` рядом с ним: там указан **смещение переменной в varstore** и **текущее значение по умолчанию**.
+3. Сопоставьте это смещение с содержимым `SetupUtility.bin` в HxD и найдите байты значения.
+4. Запишите туда нужное вам число.
+
+**Правила:**
+
+* Правьте **только** байты самого значения. Ничего больше в этом месте не трогайте.
+* Замена должна быть **той же длины**, что и исходное значение, иначе собьётся структура.
+* После правки пересоберите образ через UEFITool (шаг 6), если меняли секцию целиком.
 
 > [!WARNING]
-> Правьте **только** байты значения дефолта. Сдвиг в модуле здесь ломает образ так же, как и в масках.
+> Значение по умолчанию — это **стартовое**, а не работающее во время нагрузки. Платформа читает фактический лимит из своего железа, и BIOS тут только инициализатор. Прежде чем считать, что правка дала эффект, сверьте результат на живой машине: снять реальный лимит можно утилитой чтения MSR (например, RWEverything или ThrottleStop) — регистры `0x606` и `0x610`.
+
+> [!TIP]
+> **Почему инструкция не даёт конкретного адреса.** Смещение и набор байт зависят от того, какой именно дамп вы открыли и какая ревизия платы стоит. Адрес из чужой сборки здесь не просто бесполезен, а опасен — вы затрёте соседний пункт и получите форму, которая выглядит живой, а работает через раз. Способ выше даёт правильный адрес для **вашего** файла.
 
 ---
 
@@ -411,9 +454,13 @@ Verified by a byte-for-byte comparison against the stock image.
 | # | Change | Location |
 |---|---|---|
 | 1 | **Menu mask substitution** — `Information` and `Power` swapped places; `Security` and `Advanced` exchanged their form content | `SetupUtility` menu table |
-| 2 | **Cosmetic rename** — `Harddisk Security` became `Harddisk Advanced`; a `Power` label was added, padded to the original string length | Unicode strings in `SetupUtility` |
-| 3 | **Power Limit** — default set by hand in the hex editor to `800`, because the UI item was unstable | `Power & CPU` form |
-| 4 | **Boot logo** — stock splash replaced via H2OEZE | ~201 KB raster block in the DXE volume |
+| 2 | **Bulk option edit** — **155** option default values replaced with `0xFFFF`. The stock image contains none: this is what actually reveals the hidden engineering items | `SetupUtility` forms |
+| 3 | **Cosmetic rename** — `Harddisk Security` became `Harddisk Advanced`; a `Power` label was added, padded to the original string length | Unicode strings in `SetupUtility` |
+| 4 | **Power Limit** — default patched by hand in the hex editor, because the UI item kept resetting itself | `Power & CPU` form |
+| 5 | **Boot logo** — stock splash replaced via H2OEZE | ~201 KB raster block in the DXE volume |
+
+> [!IMPORTANT]
+> **Steps 1 and 2 work together.** Swapping masks alone is not enough: the BIOS opens the right form, but its items stay suppressed. The bulk edit to `0xFFFF` lifts that suppression.
 
 ### Boundaries of the change
 
@@ -423,7 +470,7 @@ Across the whole 4 MB image, **only the DXE firmware volume and 22 bytes of its 
 * Flash descriptor, PEI volume, SMM, boot block — **identical**
 * DMI data and serial numbers — **identical**
 
-No foreign serials or foreign ME are carried in. Rollback is clean and the blast radius is a single volume.
+No foreign serials or foreign ME are carried in, and rollback comes out clean. These are the boundaries of **the edit in the file** — the risk of the flashing procedure itself is set by the warnings above, not by this list.
 
 ---
 
@@ -471,13 +518,17 @@ Download and collect yourself:
 | `Advanced` position | `Security` record |
 
 > [!CAUTION]
-> ### 🛑 Edit **BY OFFSET**, never with Replace All
-> Sequential Replace All operations will cancel each other out, or leave two references to one form and hang the BIOS. Correct order:
+> ### 🛑 Edit **BY OFFSET**, and save both records first
+> Sequential Replace All operations will cancel each other out, or leave two references to one form and hang the BIOS. Editing by offset naively fails too: once you paste **A** over **B**, the original **B** is gone and step 5 has nothing to paste.
+>
+> Correct order:
 > 1. Locate the byte address of record **A** and record **B**.
-> 2. Copy **A** to the clipboard.
-> 3. Paste **A** at address **B**.
-> 4. Paste **B** at address **A**.
-> 5. Save.
+> 2. Copy **A** to a separate text file.
+> 3. Copy **B** to **another** file. Both originals are now safe.
+> 4. Paste file **A** at address **B**.
+> 5. Paste file **B** at address **A**.
+> 6. Verify: both addresses now hold the other record, each exactly 36 bytes.
+> 7. Save.
 
 <details>
   <summary><b>📋 All menu masks (click to expand)</b></summary>
@@ -496,14 +547,35 @@ Download and collect yourself:
 > [!IMPORTANT]
 > **The size of `SetupUtility.bin` must not change by a single byte.** Overwrite only.
 
-**Step 4 — cosmetic rename (optional).** Unicode, same length:
+**Step 4 — bulk edit of options to `0xFFFF`.** Swapping masks opens the form, but its items stay suppressed: the tab appears and is empty. A bulk edit lifts that.
+
+Each affected option carries a record shaped `85 00 01 <value>`:
+
+| | stock | after |
+|---|---|---|
+| single option | `85 00 01 02 00` | `85 00 01 ff 00` |
+| group of five | `85 00 01 05 00 00 00 01 00 02 00 03 00 04 00` | `85 00 01 ff 00 ff 00 ff 00 ff 00 ff 00` |
+
+**How to find them:**
+1. Open `SetupUtility.bin` in HxD → `Ctrl+H` → **Hex-values** mode.
+2. Search the byte sequence `85 00 01`.
+3. Inspect each hit individually — check what follows the third byte.
+4. Replace values like `02 00` or `05 00 00 00 01 00 02 00 03 00 04 00` with `ff 00` (two bytes per value).
+5. Leave values that are already `ff 00` alone.
+
+**How many.** The stock `SetupUtility` holds **194** such records, of which **155** need the edit. Leave the rest as they are — they are not suppressed options and replacing them blindly breaks the form.
+
+> [!WARNING]
+> **Do not Replace All this.** The sequence `85 00 01` also occurs in other IFR constructs where it is not followed by option values. Read every hit by eye. A mistake here gives either a dead form or a BIOS that does not start.
+
+**Step 5 — cosmetic rename (optional).** Unicode, same length:
 * `Security` → `Advanced`: `53 00 65 00 63 00 75 00 72 00 69 00 74 00 79 00` → `41 00 64 00 76 00 61 00 6E 00 63 00 65 00 64 00`
 * `Information` → `Power`: `49 00 6E 00 66 00 6F 00 72 00 6D 00 61 00 74 00 69 00 6F 00 6E 00` → `50 00 6F 00 77 00 65 00 72 00 20 00 20 00 20 00 20 00 20 00 20 00` (`Power` + 6 spaces = 11 chars)
 
 > [!WARNING]
 > Never Replace All the word `Power` across the file. It also appears in system variables; a global replacement corrupts the reference structure and the BIOS freezes or renders garbage.
 
-**Step 5 — rebuild.** **UEFITool** → `SetupUtility` → *PE32 image section* → **Replace body** → `File` → **Save image file** (`mod_bios.rom`).
+**Step 6 — rebuild.** **UEFITool** → `SetupUtility` → *PE32 image section* → **Replace body** → `File` → **Save image file** (`mod_bios.rom`).
 
 ---
 
@@ -519,15 +591,26 @@ Download and collect yourself:
 
 ### ⚡ INSTRUCTION 3: Power Limit by hand
 
-The item is buried in the UI and set unreliably there, so the default is patched directly:
+The item is buried in the UI and sets unreliably — the value resets itself. So the default is patched directly.
 
-1. Open `mod_bios.rom` in **HxD**.
-2. Find the Power Limit item in the `Power & CPU` form.
-3. Write **800** into the default bytes.
-4. Save, and rebuild through UEFITool if you touched the section.
+**How to locate the bytes (without guessing):**
+
+1. Run `SetupUtility.bin` through **IFRExtractor** — you already have this file from step 1.
+2. Open the `.txt` and find the item; look at the `VarStoreInfo` block near it — it gives the **variable offset in the varstore** and the **current default**.
+3. Map that offset onto `SetupUtility.bin` in HxD and locate the value bytes.
+4. Write in the number you want.
+
+**Rules:**
+
+* Edit **only** the value bytes. Nothing else at that spot.
+* The replacement must be the **same length** as the original, or the structure breaks.
+* Rebuild through UEFITool (step 6) if you modified the section as a whole.
 
 > [!WARNING]
-> Edit **only** the default value bytes. Any shift breaks the image exactly like a bad mask swap does.
+> A default value is the **starting point**, not what runs under load. The platform reads the real limit from its own hardware; the BIOS only initialises it. Before treating the patch as effective, verify on the live machine by reading the MSRs (RWEverything or ThrottleStop will do) — registers `0x606` and `0x610`.
+
+> [!TIP]
+> **Why no fixed address is given.** Offset and byte layout depend on which dump you opened and which board revision you have. An address from someone else's build is not just useless here, it is dangerous — you will overwrite the neighbouring option and get a form that looks alive but half-works. The method above yields the correct address for **your** file.
 
 ---
 
