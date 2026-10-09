@@ -79,7 +79,7 @@
   * `TgaDecoder` и `PrePostHotkey`.
 
 ### 🚀 Рекомендуемые настройки процессора (Turbo Boost):
-В `mod_bios.rom` по умолчанию заданы безопасные значения. Для работы Turbo Boost на i5/i7 рекомендуется вручную:
+В `Acer Aspire 5742G-unlock.bin` по умолчанию заданы безопасные значения. Для работы Turbo Boost на i5/i7 рекомендуется вручную:
 * **Шаг 1:** В `Power & CPU -> Security CPU Control` ОБЯЗАТЕЛЬНО включите C-States (`[Enabled]`). Без этого Turbo Boost не сможет поднимать частоты!
 * **Шаг 2:** В `Advanced -> Chipset Configuration` установите QPI Frequency на максимальные `[6.400 GT]`.
 * **Шаг 3:** Power Limit по умолчанию увеличен до 800 (80 Вт), чтобы частота не сбрасывалась из-за лимита мощности. Это повышает нагрев: следите за температурами и состоянием системы охлаждения.
@@ -164,7 +164,7 @@ HEX-коды меню из SetupUtility
 
 #### Шаг 5: Сборка BIOS (UEFITool)
 1. В **UEFITool** найдите секцию `SetupUtility`, кликните правой кнопкой по *PE32 image section* внутри `SetupUtility` -> **Replace body** и выберите измененный `SetupUtility.bin`.
-2. Сохраните образ: `File` -> `Save image file` (назовите `mod_bios.rom`).
+2. Сохраните образ: `File` -> `Save image file` (назовите `Acer Aspire 5742G-unlock.bin`).
 
 ---
 
@@ -188,7 +188,7 @@ HEX-коды меню из SetupUtility
 
 ## 🖼️ ИНСТРУКЦИЯ 3: Замена логотипа (H2OEZE)
 
-1. Откройте ваш `mod_bios.rom` в **H2OEZE** (`File` -> `Load ROM`).
+1. Откройте ваш `Acer Aspire 5742G-unlock.bin` в **H2OEZE** (`File` -> `Load ROM`).
 2. Перейдите в `Components` -> `Logo`.
 3. Нажмите `Browse` и выберите изображение (**1024x768**, формат **только BMP (16-цветный рисунок)**, вес **менее 900 КБ**).
 4. Нажмите `Apply`. В окне конвертации/сжатия обязательно нажмите **`Yes`**.
@@ -213,7 +213,7 @@ HEX-коды меню из SetupUtility
 6. Только теперь снова подключите программатор к компьютеру по USB.
 7. Нажмите `Detect` и убедитесь, что чип определяется стабильно и без ошибок. Если чип не определяется, **сначала отключите USB**, и только потом переставляйте прищепку.
 8. **Обязательно** сделайте бэкап оригинального BIOS: считайте его минимум 2-3 раза, сохраните файлы и сравните их хэш-суммы. Файлы должны быть абсолютно идентичны. Проверить хэши в Windows (cmd или PowerShell): `certutil -hashfile "дамп.bin" SHA256` — выполните команду для каждого считанного файла и сравните значения SHA256.
-9. Откройте файл модифицированного BIOS: **Acer Aspire 5742G-unlock.bin** (или ваш **mod_bios.rom**, если собирали самостоятельно) через File -> Open.
+9. Откройте файл модифицированного BIOS: **Acer Aspire 5742G-unlock.bin** (или ваш **Acer Aspire 5742G-unlock.bin**, если собирали самостоятельно) через File -> Open.
 10. Очистите чип (`Erase`).
 11. Запишите прошивку на чип (`Write`).
 12. Дождитесь окончания верификации (`Verify`). Она должна завершиться без ошибок.
@@ -325,7 +325,7 @@ In the modified dump `Acer Aspire 5742G-unlock.bin`, not only are the engineerin
   * `TgaDecoder` and `PrePostHotkey`.
 
 ### 🚀 Recommended CPU settings (Turbo Boost):
-`mod_bios.rom` ships with safe default values. To make Turbo Boost work on i5/i7, the following settings are recommended manually:
+`Acer Aspire 5742G-unlock.bin` ships with safe default values. To make Turbo Boost work on i5/i7, the following settings are recommended manually:
 * **Step 1:** In `Power & CPU -> Security CPU Control`, you MUST enable C-States (`[Enabled]`). Without this, Turbo Boost will not be able to raise frequencies!
 * **Step 2:** In `Advanced -> Chipset Configuration`, set QPI Frequency to the maximum `[6.400 GT]`.
 * **Step 3:** Power Limit is increased to 800 (80 W) by default so the frequency does not drop because of the power limit. This raises heat output: watch your temperatures and the condition of the cooling system.
@@ -408,7 +408,7 @@ HEX-codes of menus from SetupUtility
 
 #### Step 5: BIOS Assembly (UEFITool)
 1. In **UEFITool** find the `SetupUtility` section, right-click on the *PE32 image section* inside `SetupUtility` -> **Replace body** and select the modified `SetupUtility.bin`.
-2. Save the image: `File` -> `Save image file` (name it `mod_bios.rom`).
+2. Save the image: `File` -> `Save image file` (name it `Acer Aspire 5742G-unlock.bin`).
 
 ---
 
@@ -432,7 +432,7 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 
 ## 🖼️ INSTRUCTION 3: Logo Replacement (H2OEZE)
 
-1. Open your `mod_bios.rom` in **H2OEZE** (`File` -> `Load ROM`).
+1. Open your `Acer Aspire 5742G-unlock.bin` in **H2OEZE** (`File` -> `Load ROM`).
 2. Go to `Components` -> `Logo`.
 3. Click `Browse` and select an image (**1024x768**, format **only BMP (16-color image)**, size **less than 900 KB**).
 4. Click `Apply`. In the conversion/compression window, be sure to click **`Yes`**.
@@ -459,7 +459,7 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 6. Only now connect the programmer to your computer via USB again.
 7. Click `Detect` and make sure the chip is detected reliably and without errors. If the chip is not detected, **unplug USB first**, and only then reseat the clip.
 8. **Always** back up the original BIOS: read it at least 2-3 times, save the files and compare their hash sums. The files must be absolutely identical. To compare hashes in Windows (cmd or PowerShell): `certutil -hashfile "dump.bin" SHA256` — run it for every read file and compare the SHA256 values.
-9. Open the modified BIOS file: **Acer Aspire 5742G-unlock.bin** (or your **mod_bios.rom** if you compiled it yourself) via File -> Open.
+9. Open the modified BIOS file: **Acer Aspire 5742G-unlock.bin** (or your **Acer Aspire 5742G-unlock.bin** if you compiled it yourself) via File -> Open.
 10. Erase the chip (`Erase`).
 11. Write the firmware to the chip (`Write`).
 12. Wait for the verification to finish (`Verify`). It must complete without errors.
