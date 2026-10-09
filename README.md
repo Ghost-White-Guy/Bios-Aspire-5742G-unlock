@@ -7,6 +7,7 @@
 ---
 ![Platform](https://img.shields.io/badge/Platform-Acer_5742G-lightgrey)
 ![Tools](https://img.shields.io/badge/Tools-UEFITool_%7C_HxD-orange)
+
 [![Инструкция](https://img.shields.io/badge/🔌_Инструкция_Финальная_прошивка-red?style=for-the-badge)](#flash-ru)
 
 <h2 id="ru">🇷🇺 Русский (Описание)</h2>
@@ -195,7 +196,11 @@ HEX-коды меню из SetupUtility
 
 ---
 
-<h2 id="flash-ru">🔌 ИНСТРУКЦИЯ 4: Финальная прошивка</h2>
+</details>
+
+<details open id="flash-ru">
+  <summary><b>🔌 ИНСТРУКЦИЯ 4: Финальная прошивка</b></summary>
+  <br>
 
 1. Откройте **AsProgrammer**.
 2. Очистите чип памяти на материнской плате ноутбука.
@@ -410,7 +415,11 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 
 ---
 
-<h2 id="flash-en">🔌 INSTRUCTION 4: Final Flashing</h2>
+</details>
+
+<details open id="flash-en">
+  <summary><b>🔌 INSTRUCTION 4: Final Flashing</b></summary>
+  <br>
 
 1. Open **AsProgrammer**.
 2. Erase the memory chip on the laptop motherboard.
