@@ -213,7 +213,7 @@ HEX-коды меню из SetupUtility
 6. Только теперь снова подключите программатор к компьютеру по USB.
 7. Нажмите `Detect` и убедитесь, что чип определяется стабильно и без ошибок. Если чип не определяется, **сначала отключите USB**, и только потом переставляйте прищепку.
 8. **Обязательно** сделайте бэкап оригинального BIOS: считайте его минимум 2-3 раза, сохраните файлы и сравните их хэш-суммы. Файлы должны быть абсолютно идентичны.
-9. Откройте файл `mod_bios.rom` (`File` -> `Open`).
+9. Откройте файл модифицированного BIOS: **Acer Aspire 5742G-unlock.bin** (или ваш **mod_bios.rom**, если собирали самостоятельно) через File -> Open.
 10. Очистите чип (`Erase`).
 11. Запишите прошивку на чип (`Write`).
 12. Дождитесь окончания верификации (`Verify`). Она должна завершиться без ошибок.
@@ -446,7 +446,7 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 6. Only now connect the programmer to your computer via USB again.
 7. Click `Detect` and make sure the chip is detected reliably and without errors. If the chip is not detected, **unplug USB first**, and only then reseat the clip.
 8. **Always** back up the original BIOS: read it at least 2-3 times, save the files and compare their hash sums. The files must be absolutely identical.
-9. Open the `mod_bios.rom` file (`File` -> `Open`).
+9. Open the modified BIOS file: **Acer Aspire 5742G-unlock.bin** (or your **mod_bios.rom** if you compiled it yourself) via File -> Open.
 10. Erase the chip (`Erase`).
 11. Write the firmware to the chip (`Write`).
 12. Wait for the verification to finish (`Verify`). It must complete without errors.
