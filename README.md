@@ -202,8 +202,8 @@ HEX-коды меню из SetupUtility
   <summary><b>🔌 Инструкция по прошивке</b></summary>
   <br>
 
-> [!CAUTION]
-> **ВНИМАНИЕ!** При несоблюдении правил прошивки ваше оборудование может пострадать. За поломку или деградацию вашего устройства автор данного репозитория ответственности не несёт. Всё выполняется исключительно на ваш страх и риск.
+> ### ⚠️ ВНИМАНИЕ!
+> При несоблюдении правил прошивки ваше оборудование может пострадать. За поломку или деградацию вашего устройства автор данного репозитория ответственности не несёт. Всё выполняется **исключительно на ваш страх и риск.**
 
 1. Выключите ноутбук, отключите блок питания и **снимите аккумулятор**.
 2. Подключите программатор к компьютеру по USB (**прищепка при этом ни к чему не подключена**) и запустите **AsProgrammer**.
@@ -435,8 +435,8 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
   <summary><b>🔌 Flashing instructions</b></summary>
   <br>
 
-> [!CAUTION]
-> **ATTENTION!** If the flashing rules are not followed, your hardware may be damaged. The author of this repository is not responsible for any breakage or degradation of your device. Everything is done entirely at your own risk.
+> ### ⚠️ ATTENTION!
+> If the flashing rules are not followed, your hardware may be damaged. The author of this repository is not responsible for any breakage or degradation of your device. Everything is done **entirely at your own risk.**
 
 1. Turn off the laptop, disconnect the power adapter and **remove the battery**.
 2. Connect the programmer to your computer via USB (**the clip must not be attached to anything yet**) and launch **AsProgrammer**.
