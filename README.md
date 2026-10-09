@@ -106,10 +106,10 @@
 
 
 
-### Инструкции по прошивке и модификации
+### Инструкции по модификации
 
 <details>
-  <summary><b>📖 Подробные инструкции по прошивке и модификации (Нажми, чтобы развернуть)</b></summary>
+  <summary><b>📖 Подробные инструкции по модификации (Нажми, чтобы развернуть)</b></summary>
   <br>
  
 ## ⚙️ ИНСТРУКЦИЯ 1: Самостоятельная разблокировка меню (Подмена масок)
@@ -194,12 +194,12 @@ HEX-коды меню из SetupUtility
 4. Нажмите `Apply`. В окне конвертации/сжатия обязательно нажмите **`Yes`**.
 5. Сохраните прошивку: `File` -> `Save`.
 
----
-
 </details>
 
+---
+
 <details open id="flash-ru">
-  <summary><b>🔌 ИНСТРУКЦИЯ 4: Финальная прошивка</b></summary>
+  <summary><b>🔌 Инструкция по прошивке</b></summary>
   <br>
 
 1. Откройте **AsProgrammer**.
@@ -325,10 +325,10 @@ For your convenience, all necessary programs are packed into `.7z` archives. You
 
 ---
 
-### Firmware and modification instructions
+### Modification instructions
 
 <details>
-  <summary><b>📖 Detailed instructions on firmware and modifications (Click to expand)</b></summary>
+  <summary><b>📖 Detailed modification instructions (Click to expand)</b></summary>
   <br>
 
 ## ⚙️ INSTRUCTION 1: Manual menu unlocking (Mask substitution)
@@ -417,8 +417,10 @@ For those who downloaded `DXE_Modules_Pack.7z` and want to flash drivers (AHCI, 
 
 </details>
 
+---
+
 <details open id="flash-en">
-  <summary><b>🔌 INSTRUCTION 4: Final Flashing</b></summary>
+  <summary><b>🔌 Flashing instructions</b></summary>
   <br>
 
 1. Open **AsProgrammer**.
