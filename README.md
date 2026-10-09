@@ -234,6 +234,7 @@ This repository contains BIOS dumps for the Acer Aspire 5742G laptop, along with
 > 3. **DE-ENERGIZE THE BOARD:** Before connecting the programmer clip to the chip, you **MUST** disconnect the power supply and remove the battery from the laptop.
 > 4. **MAKE A BACKUP:** Before flashing anything, read your original BIOS via the programmer at least 2-3 times. Save these files and check that they are absolutely identical (hash sums match). If the files are different, the clip is seated crookedly; do not read or flash like this!
 > 5. **SPARE PC:** Do not start flashing the modified BIOS if you do not have a second working PC/laptop at hand. In case of an error, you will need a second device to flash the original dump back.
+> 6. **HARDWARE LIMITATIONS (SILICON):** some engineering menu items are hardware‑locked at the level of the processor/chipset memory controller.  Even if you select different values in the BIOS, the system will reset them to the safe factory defaults (fail‑safe) upon reboot.  This is a physical limitation of silicon, not a firmware bug, and it cannot be fixed.
 
 > [!WARNING]
 > **ALL ACTIONS ARE PERFORMED ENTIRELY AT YOUR OWN RISK!** The author of the repository is not responsible for any damaged equipment.
