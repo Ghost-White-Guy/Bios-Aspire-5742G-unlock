@@ -151,7 +151,7 @@
 
 ### Готовые дампы:
 * `Acer Aspire 5742G.bin` — **оригинальный дамп**, считанный программатором. Он же ваш путь отката. Несёт серийные номера, DMI и ME-регион именно этой машины.
-* `Acer Aspire 5742G-unlock.bin` — модифицированный дамп с разблокированными меню и новым логотипом.
+* `Acer Aspire 5742G-unlock.rom` — модифицированный дамп с разблокированными меню и новым логотипом.
 
 > [!IMPORTANT]
 > **Для отката используйте СВОЙ дамп.** Файл `Acer Aspire 5742G.bin` содержит DMI и серийники конкретного ноутбука. Если ваша плата отличается по ревизии — не заливайте его.
@@ -336,7 +336,7 @@
 6. Только теперь снова подключите программатор к ПК по USB.
 7. `Определить чип` (`Detect`). Чип должен определяться стабильно. Если нет — **сначала отключите USB**, и только потом переставляйте прищепку.
 8. **Обязательно снимите бэкап:** считайте BIOS 2–3 раза и сравните хэши. В Windows: `certutil -hashfile "dump.bin" SHA256`. Файлы должны совпасть. **Пока нет двух совпавших чтений, `Erase` нажимать нельзя.** Скопируйте дамп на второй носитель **до** стирания.
-9. Откройте модифицированный образ (`Acer Aspire 5742G-unlock.bin` или ваш `mod_bios.rom`) через `File` → `Open`. Проверьте, что **объём файла совпадает с объёмом вашего чипа** (4 МБ = 4 194 304 байта) и выбран нужный чип по маркировке. При несовпадении запись уйдёт частично.
+9. Откройте модифицированный образ (`Acer Aspire 5742G-unlock.rom` или ваш `mod_bios.rom`) через `File` → `Open`. Проверьте, что **объём файла совпадает с объёмом вашего чипа** (4 МБ = 4 194 304 байта) и выбран нужный чип по маркировке. При несовпадении запись уйдёт частично.
 10. `Erase`.
 11. `Write`.
 12. Дождитесь `Verify` без ошибок. `Verify` сверяет чип с буфером программы, поэтому надёжнее **перечитать чип в новый файл и сравнить SHA256** с записанным.
@@ -484,7 +484,7 @@ These are the boundaries of **the edit in the file**. The risk of the flashing p
 ## 📁 Repository contents
 
 * `Acer Aspire 5742G.bin` — original dump read with the programmer. Rollback source. It carries this machine's serials, DMI and ME region.
-* `Acer Aspire 5742G-unlock.bin` — modified dump: menus unlocked, new logo.
+* `Acer Aspire 5742G-unlock.rom` — modified dump: menus unlocked, new logo.
 
 > [!IMPORTANT]
 > **Roll back with YOUR dump.** `Acer Aspire 5742G.bin` contains one specific machine's DMI and serials. If your board revision differs, do not flash it.
@@ -629,7 +629,7 @@ The right path is the BIOS interface, `Power & CPU` tab. After rebooting, check 
 6. Plug the programmer back into USB.
 7. `Detect`. If the chip is not found, **unplug USB first**, then reseat the clip.
 8. **Always back up:** read 2–3 times and compare hashes. `certutil -hashfile "dump.bin" SHA256`. **Do not press `Erase` until two reads match.** Copy the dump to a second drive **before** erasing.
-9. Open the modified image (`Acer Aspire 5742G-unlock.bin` or your `mod_bios.rom`) via `File` → `Open`. **File size must match chip size** (4 MB = 4,194,304 bytes) and the right chip must be selected by its marking.
+9. Open the modified image (`Acer Aspire 5742G-unlock.rom` or your `mod_bios.rom`) via `File` → `Open`. **File size must match chip size** (4 MB = 4,194,304 bytes) and the right chip must be selected by its marking.
 10. `Erase`.
 11. `Write`.
 12. Let `Verify` finish without errors. `Verify` compares the chip against the buffer, so it is safer to **read the chip back and compare SHA256** afterwards.
