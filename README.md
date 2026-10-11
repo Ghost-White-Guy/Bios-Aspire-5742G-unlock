@@ -169,7 +169,7 @@
 3. **IFRExtractor** — конвертер логики меню (IFR) в читаемый текст.
 4. **HxD** — hex-редактор для замены байтов.
 5. **H2OEZE** — замена загрузочного логотипа в Insyde.
-6. **SHA256SUMS** - файл с суммами прошивок, лижаших в репозитории.
+6. **SHA256SUMS** - файл с суммами прошивок, **лежащих** в репозитории.
 
 ---
 
@@ -500,7 +500,7 @@ Download and collect yourself:
 3. **IFRExtractor** — IFR logic to text
 4. **HxD** — hex editor
 5. **H2OEZE** — boot logo replacement for Insyde
-6. **SHA256SUMS** is a file with firmware amounts stored in the repository.
+6. **SHA256SUMS** — file with **SHA256 checksums** of the firmware images in this repository.
 
 ---
 
